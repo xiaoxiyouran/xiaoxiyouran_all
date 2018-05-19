@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Dijstra"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Dijstra_exe">
+				<Option output="C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Dijstra_exe.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir=""/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/xiaoxi/Desktop/unmd/include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 Dijstra_exe"/>
+					<CompileFile command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Dijstra_exe/fast">
+				<Option output="C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Dijstra_exe.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir=""/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/xiaoxi/Desktop/unmd/include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 Dijstra_exe/fast"/>
+					<CompileFile command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libDijstra">
+				<Option output="C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/liblibDijstra.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/xiaoxi/Desktop/unmd/include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 libDijstra"/>
+					<CompileFile command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="libDijstra/fast">
+				<Option output="C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/liblibDijstra.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/xiaoxi/Desktop/unmd/include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
+					<Add directory="e:\20170908mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 libDijstra/fast"/>
+					<CompileFile command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="E:/20170908MinGW/bin/mingw32-make.exe -f &quot;C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/xiaoxi/Desktop/unmd/lib/Dijkstra.c">
+			<Option target="libDijstra"/>
+		</Unit>
+		<Unit filename="C:/Users/xiaoxi/Desktop/unmd/main.c">
+			<Option target="Dijstra_exe"/>
+		</Unit>
+		<Unit filename="C:/Users/xiaoxi/Desktop/unmd/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/xiaoxi/Desktop/unmd/include/Dijkstra.h
+
+C:/Users/xiaoxi/Desktop/unmd/main.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+include/Dijkstra.h
+C:/Users/xiaoxi/Desktop/unmd/include/Dijkstra.h
+

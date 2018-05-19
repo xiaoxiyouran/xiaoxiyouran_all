@@ -1,0 +1,4 @@
+"E:\20180316Clion_install\CLion 2017.3.4\bin\cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\xiaoxi\Desktop\unmd
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/xiaoxi/Desktop/unmd/cmake-build-debug
