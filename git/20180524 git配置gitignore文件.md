@@ -102,6 +102,8 @@ captures/
 
 ## 参考
 
+另外的参考：https://blog.csdn.net/u011475134/article/details/71521725
+
 > [gitignore collection on github](https://link.jianshu.com?t=https://github.com/github/gitignore)
 >  [The Ignoring Files chapter of the Pro Git book.](https://link.jianshu.com?t=https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#Ignoring-Files)
 
