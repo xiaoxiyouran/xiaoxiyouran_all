@@ -1,0 +1,37 @@
+;****************************************************
+; Copyright (c) 2007 ARM, Inc.  All rights reserved.
+;****************************************************
+ESRAM 0x00000000 
+{
+	CODE 0x00000000 0x00018000
+	{
+                vectors.o (Vect, +FIRST)
+                * (InRoot$$Sections)
+                * (+RO)
+	}
+	DATA 0x00018000 0x00007000
+	{
+		* (+RW, +ZI)
+	}
+	HEAP 0x0001F000 UNINIT EMPTY  0x00000C00
+	{
+	}
+    IRQ_STACK 0x0001FE00 UNINIT EMPTY  -0x00000200
+    {
+    }
+    SYS_STACK 0x00020000 UNINIT EMPTY  -0x00000200
+    {
+    }
+     
+    ;for rpu_seu only,  0x0F00_0000 ~ 0x0F01_FFFF  
+    ;for rpu_thu0 only, 0x0F02_0000 ~ 0x0F02_FFFF  
+    ;for rpu_thu1 only, 0x0F03_0000 ~ 0x0F03_FFFF  
+    ;for all,           0x0F04_0000 ~ 0x0F07_FFFF      
+    EXT_MEM_DATA 0x0F020000 OVERLAY 0x10000
+    {
+            pea_conf_pack.socd.o (+RW, +ZI)
+            * (ext_mem_data)
+    }
+}
+
+

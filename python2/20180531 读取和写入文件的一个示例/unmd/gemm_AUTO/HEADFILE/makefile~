@@ -1,0 +1,27 @@
+RM=rm -f $(1)
+clang = ../../../llvm/bin/clang
+opt = ../../../llvm/bin/opt
+src=$(wildcard *.ll)
+HEADFILE = $(patsubst %.ll,%.h,$(src))
+TXTFILE = $(patsubst %.ll,%.txt,$(src))
+SIM = ../../Drivers/grep-simulator/GReP-Simulator
+
+all:	$(HEADFILE)
+	cp $(HEADFILE) ../
+
+$(TXTFILE):%.txt:%.ll
+	$(opt)  -S -sroa -simplifycfg -schedule-pea -compile-pea $*.ll -o $*_compile.ll	
+$(HEADFILE):%.h:%.txt
+	$(SIM) -no_run -config_sw  $^ -hw -config_hw $@
+	
+clean:
+	$(call RM,*.h)
+	$(call RM,*.ll)
+	$(call RM,*.result)
+	$(call RM,*.txt)
+	$(call RM,*.dot)
+
+#%.txt: %.c
+#	$(clang) -emit-llvm -S  --target=i386-unknown-linux-gnu $<
+#	$(opt) -S -sroa -simplifycfg -schedule-pea -compile-pea $*.ll -o $*_compile.ll
+

@@ -1,0 +1,133 @@
+TARGET = gemm
+
+rpu_thu_func_name := __gr_task_$(TARGET)
+NDEBUG = 1
+
+RM=rm -f $(1)
+UTIL = ../util
+
+CC=armcc
+AS=armasm
+LD=armlink
+AR=armar
+FE=fromelf
+
+HEADFILE=$(wildcard *.h)
+src = $(patsubst %.h,%.ll,$(HEADFILE))
+TXTFILE = $(patsubst %.ll,%.txt,$(src))
+
+GREP_FREQ_HZ=100000000
+GREP_UART_BAUD_RATE=115200
+#GREP_FREQ_HZ=DEFAULT
+#GREP_UART_BAUD_RATE=DEFAULT
+ITERATION = 100
+
+ASMFLAGS =
+CFLAGS = -c -g -O0 --signed_chars -I. -Isrc/rpu -DRPU_THU_TIMER_ENABLE=1 -DRPU_THU_UART_ENABLE=1 -DUART_SCLK_FREQ=$(GREP_FREQ_HZ) -DUART_BAUD_RATE=$(GREP_UART_BAUD_RATE)
+LDFLAGS = --info totals --info unused --map --symbols --list $@.map --scatter boot/scatter.scat --entry 0x30000000 -o $@ --datacompressor=off
+
+
+#RESULT=asc
+#TARGET=testcase_flash_load
+
+# Select build rules based on Windows or Unix
+#ifdef WINDIR
+#DONE=@if exist $(1) echo Build completed.
+#RM=if exist $(1) del /q $(1)
+#SHELL=$(WINDIR)\system32\cmd.exe
+#else
+#ifdef windir
+#DONE=@if exist $(1) echo Build completed.
+#RM=if exist $(1) del /q $(1)
+#SHELL=$(windir)\system32\cmd.exe
+#else
+DONE=@if [ -f $(1) ]; then echo Build completed.; fi
+RM=rm -f $(1)
+#endif
+#endif
+
+all: $(TARGET).bin $(TARGET)_8 clean
+	cp ./ARM7/rpu_thu.hex ./asc_slave
+	cp ./$(TARGET)_8 ./asc_8
+
+build: rpu_seu.axf
+
+rebuild: cleanall build
+
+%.o: %.s
+	../../crosstool-ng/x-tool/arm-arm7tdmi_s-eabi/bin/arm-arm7tdmi_s-eabi-gcc -mabi=apcs-gnu -c $< -o $@
+
+%.s: %.ll
+	../../llvm/bin/llc -march=arm -mcpu=arm7tdmi-s -mattr=+apcs $<
+
+#parse
+task_main.ll: task_main.grc
+	../../llvm/bin/clang -emit-llvm -DNDEBUG -DITERATIONS=$(ITERATION) -S $<
+
+new_bmark.ll: new_bmark.grc
+	../../llvm/bin/clang -emit-llvm --target=i386-unknown-linux-gnu -DGREP_COPROCESSOR_ENABLE=1 -DSOFT_RPU_ENABLE=0 -DITERATIONS=$(ITERATION) -S $<
+
+$(rpu_thu_func_name).ll: new_bmark.ll
+	../../llvm/bin/opt -S -split-task $< -o temp.ll
+	echo $(src)
+	cp $(src) ./HEADFILE
+	make -C ./HEADFILE
+	#cp ./HEADFILE/$(patsubst %.ll,%.h,$(HEADFILE)) ./
+
+#ARM7
+./ARM7/$(rpu_thu_func_name).arm: $(rpu_thu_func_name).o task_main.o
+	make -C ./ARM7 rpu_thu_func_name=$(rpu_thu_func_name)
+#build
+main.o : main.s
+
+main.ll: bmark.ll
+	../../llvm/bin/opt -S -split-task $< -o $@ 
+
+bmark.ll: new_bmark.grc ./ARM7/$(rpu_thu_func_name).arm
+	../../llvm/bin/clang -DGREP_COPROCESSOR_ENABLE=1 -DSOFT_RPU_ENABLE=0 -DNDEBUG -DITERATIONS=$(ITERATION) -D__DEFINE_BUILD_STAGE__ -emit-llvm -S $< -o $@
+
+#link
+rpu_seu.axf: ../Drivers/rpu_seu/libRpuSeu.a init.o vectors.o retarget.o main.o
+	$(LD) $(OBJECTS) $(LDFLAGS) $^
+
+#boot
+init.o : boot/init.s
+	$(AS) $(ASMFLAGS) $<
+
+vectors.o : boot/vectors.s
+	$(AS) $(ASMFLAGS) $<
+
+retarget.o : boot/retarget.c
+	$(CC) $(CFLAGS) $<
+
+#rpu driver
+#IN rpu_seu
+
+#bin
+$(TARGET).bin : rpu_seu.axf
+	$(FE) --bin $< -o $@
+#asc_8
+$(TARGET)_8 : rpu_seu.axf
+	$(FE) --vhx --8x1 $< -o $@
+
+clean:
+	#$(call RM,*.txt)
+	$(call RM,*.log)
+	$(call RM,*.map)
+	$(call RM,*.o)
+	$(call RM,*.s)
+	$(call RM,*.ll)
+	$(call RM,*.config)
+	$(call RM,*.csv)
+	$(call RM,*.cse)
+	$(call RM,*.css)
+	$(call RM,*_slave)
+	$(call RM,*.arm)
+	$(call RM,*.result)
+
+cleanall: clean
+	make -C ./ARM7 cleanall
+	make -C ./HEADFILE clean
+	$(call RM,*.axf)
+	$(call RM,*.bin)
+	$(call RM,*_8)

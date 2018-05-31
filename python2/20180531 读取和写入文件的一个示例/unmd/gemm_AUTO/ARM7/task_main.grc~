@@ -1,0 +1,135 @@
+#include <stdio.h>
+#include "thlib.h"
+#include "./rpu_thu/rpu_thu_drv.h"
+#include "./rpu_thu/gr_thu.h"
+
+void __gr_task_gem(int *matA,int *matB,int *matC,int *temp,int *output,unsigned int* config_pack_gemm,unsigned int config_pack_gemm_line);
+
+int rpu_thu_run_fir_filter(rpu_thu_cmd_para_type *rpu_seu_cmd_para)
+{
+    e_s32 i;
+
+    int *matA, *matB, *matC, *temp, *output;
+    unsigned int* config_pack_gemm;
+    unsigned int config_pack_gemm_line;
+    th_printf("rpu_thu_run_fir_filter start\n");
+/*
+    //pea
+    int pea_config_idx = rpu_thu_seek_pea_config(rpu_seu_cmd_para->pea_config_packet_base,RPU_PEA_CONFIG_ID_FIR_FILTER);
+    if (pea_config_idx < 0)
+    {
+        return -1;
+    }
+
+    config_pack_fir = rpu_seu_cmd_para->pea_config_packet_base[pea_config_idx].addr;
+    config_pack_fir_line = rpu_seu_cmd_para->pea_config_packet_base[pea_config_idx].length>>3;
+*/
+    //paramter
+    th_printf("imax=%d\n", rpu_seu_cmd_para->kernel_para_num);
+    for (i=0;i<rpu_seu_cmd_para->kernel_para_num;i++)
+    {
+        th_printf("i=%d id=%d data=%x\n", i, rpu_seu_cmd_para->kernel_para[i].id, rpu_seu_cmd_para->kernel_para[i].addr);
+        if (rpu_seu_cmd_para->kernel_para[i].id == 0)
+        {
+            matA = (e_s32 *)rpu_seu_cmd_para->kernel_para[i].addr;
+        }
+        else if (rpu_seu_cmd_para->kernel_para[i].id == 1)
+        {
+            matB = (e_s32 *)rpu_seu_cmd_para->kernel_para[i].addr;
+        }
+        else if (rpu_seu_cmd_para->kernel_para[i].id == 2)
+        {
+            matC = (e_s32 *)rpu_seu_cmd_para->kernel_para[i].addr;
+        }
+        else if (rpu_seu_cmd_para->kernel_para[i].id == 3)
+        {
+            temp = (e_s32 *)rpu_seu_cmd_para->kernel_para[i].addr;
+        }
+		else if (rpu_seu_cmd_para->kernel_para[i].id == 4)
+        {
+            output = (e_s32 *)rpu_seu_cmd_para->kernel_para[i].addr;
+        }
+		else if (rpu_seu_cmd_para->kernel_para[i].id == 5)
+        {
+            config_pack_gemm = (e_s32 *)rpu_seu_cmd_para->kernel_para[i].addr;
+	}
+		else if (rpu_seu_cmd_para->kernel_para[i].id == 6)
+        {
+            config_pack_gemm_line = (e_s32 *)rpu_seu_cmd_para->kernel_para[i].addr;
+	}
+        else
+        {
+#if !defined( NDEBUG )
+            th_printf("rpu_thu_run : no supported kernel_para_id .\n");
+#endif
+        }
+    }
+    th_printf("matA.addr = %x\n",matA);
+    //run
+    __gr_task_gem(matA,matB,matC,temp,output,config_pack_gemm,config_pack_gemm_line);
+
+    return 0;
+}
+
+
+int rpu_thu_run(rpu_thu_cmd_para_type *rpu_seu_cmd_para)
+{
+
+    if (rpu_seu_cmd_para->kernel_id == 0)
+    {
+        rpu_thu_run_fir_filter(rpu_seu_cmd_para);
+    }
+    else
+    {
+    #if !defined( NDEBUG )
+        th_printf("rpu_thu_run : no supported kernel_id .\n");
+    #endif
+    }
+
+    return 0;
+}
+
+int main( )
+{
+    rpu_thu_cmd_para_type  *rpu_seu_cmd_para; 
+
+#if !defined( NDEBUG )
+    th_printf("rpu_thu app boot ok.\n");
+#endif
+
+
+    rpu_thu_init();
+
+    while (1)
+    {
+        volatile int rpu_seu_cmd = pop_rpu_cmd_fifo();
+ 	th_printf("rpu_seu_cmd = %x\n",rpu_seu_cmd);
+        switch (rpu_seu_cmd)
+        {
+        case RPU_THU_CMD_BOOT:
+            rpu_thu_boot();
+            break;
+        case RPU_THU_CMD_REBOOT:
+            rpu_thu_reboot();
+            break;
+        case RPU_THU_CMD_RUN:
+            rpu_seu_cmd_para = (rpu_thu_cmd_para_type *)pop_rpu_cmd_fifo();
+ 	    th_printf("rpu_seu_cmd_para = %x\n",rpu_seu_cmd_para);
+            rpu_thu_run_task(rpu_seu_cmd_para);
+#if !defined( NDEBUG )
+            th_printf("rpu_thu app run ok.\n");
+#endif
+            break;
+        case RPU_THU_CMD_SYNC:
+            rpu_thu_sync();
+#if !defined( NDEBUG )
+            th_printf("rpu_thu app sync ok.\n");
+#endif
+            break;
+        default:
+            delay_us(10);
+            break;
+        }
+    }
+    return 0;
+}

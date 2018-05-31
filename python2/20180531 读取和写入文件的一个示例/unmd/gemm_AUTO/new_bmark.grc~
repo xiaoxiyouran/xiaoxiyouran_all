@@ -1,0 +1,675 @@
+/*==============================================================================
+ *$RCSfile: bmark.c,v $
+ *
+ *   DESC : TH Regular Test Harness routines for benchmarks
+ *
+ * AUTHOR : Rick Foos, ECL, LLC
+ *
+ *  EEMBC : Technical Advisory Group (TechTAG)
+ *
+ *    CVS : $Revision: 1.13 $
+ *          $Date: 2002/08/12 20:23:06 $
+ *          $Author: rick $
+ *          $Source: d:/cvs/eembc2/techtag/empty/bmark.c,v $
+ *          
+ * NOTE   : Since benchmarks can be entered (run) multiple times, the benchmark
+ *          MUST NOT depend on global data being initialized.  E.g. it must
+ *          complelty initialize itself EVERY TIME its t_run_test() function
+ *          is called.
+ *
+ *------------------------------------------------------------------------------
+ *
+ * HISTORY :
+ *
+ * $Log: bmark.c,v $
+ * Revision 1.13  2002/08/12 20:23:06  rick
+ * Fix have_malloc compile_out_heap conflict
+ *
+ * Revision 1.12  2002/08/09 00:01:55  rick
+ * Add NI CRC to TH Regular
+ *
+ * Revision 1.11  2002/08/07 22:21:09  rick
+ * Add NI CRC to TH Regular
+ *
+ * Revision 1.10  2002/08/06 21:59:04  rick
+ * Add NI CRC to TH Regular
+ *
+ * Revision 1.9  2002/07/26 22:21:33  rick
+ * If no heap, Compile out th_malloc call.
+ *
+ * Revision 1.8  2002/07/22 16:10:12  rick
+ * Fix iteration dependant NI CRC
+ *
+ * Revision 1.7  2002/05/29 22:12:37  rick
+ * Set recommended iterations with make
+ *
+ * Revision 1.6  2002/05/23 20:22:36  rick
+ * Clear ansi warnings
+ *
+ * Revision 1.5  2002/04/25 23:20:30  rick
+ * Cleanup after bug database scrub
+ *
+ * Revision 1.4  2002/04/12 21:30:47  rick
+ * Make Lite more consistent with Regular
+ *
+ * Revision 1.3  2002/03/20 23:19:26  rick
+ * Empty Benchmarks
+ *
+ *
+ *------------------------------------------------------------------------------
+ * Copyright (c) 1998-2002 by the EDN Embedded Microprocessor 
+ * Benchmark Consortium (EEMBC), Inc. 
+ * 
+ * All Rights Reserved. This is licensed program product and 
+ * is owned by EEMBC. The Licensee understands and agrees that the 
+ * Benchmarks licensed by EEMBC hereunder (including methods or concepts 
+ * utilized therein) contain certain information that is confidential 
+ * and proprietary which the Licensee expressly agrees to retain in the 
+ * strictest confidence and to use only in conjunction with the Benchmarks 
+ * pursuant to the terms of this Agreement. The Licensee further agrees 
+ * to keep the source code and all related documentation confidential and 
+ * not to disclose such source code and/or related documentation to any 
+ * third party. The Licensee and any READER of this code is subject to 
+ * either the EEMBC Member License Agreement and/or the EEMBC Licensee 
+ * Agreement. 
+ * TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, EEMBC DISCLAIMS ALL 
+ * WARRANTIES, EITHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, 
+ * IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR 
+ * PURPOSE, WITH REGARD TO THE BENCHMARKS AND THE ACCOMPANYING 
+ * DOCUMENTATION. LICENSEE ACKNOWLEDGES AND AGREES THAT THERE ARE NO 
+ * WARRANTIES, GUARANTIES, CONDITIONS, COVENANTS, OR REPRESENTATIONS BY 
+ * EEMBC AS TO MARKETABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR OTHER 
+ * ATTRIBUTES, WHETHER EXPRESS OR IMPLIED (IN LAW OR IN FACT), ORAL OR 
+ * WRITTEN. 
+ * 
+ * Licensee hereby agrees by accessing this source code that all benchmark 
+ * scores related to this code must be certified by ECL prior to publication 
+ * in any media, form, distribution, or other means of conveyance of 
+ * information subject to the terms of the EEMBC Member License Agreement 
+ * and/or EEMBC Licensee Agreement. 
+ * 
+ * Other Copyright Notice (if any): 
+ * 
+ * For conditions of distribution and use, see the accompanying README file.
+ * ===========================================================================*/
+
+/*******************************************************************************
+    Includes                                                                    
+*******************************************************************************/
+//#include "rpu_thu_drv.h"
+#include "../Drivers/rpu_seu/rpu_thu_drv.h"
+#include "../Drivers/rpu_seu/gr_seu.h"
+#include "../Drivers/rpu_thu/gr_thu.h"
+#include "../Drivers/rpu_thu/rpu_thu_pea_drv.h"
+
+/*------------------------------------------------------------------------------
+ * Test Component Defintion Structure
+-------------------------------------------------------------------------------- */
+
+#define NON_INTRUSIVE_CRC_CHECK 1
+#define NDEBUG 1
+#define VERIFY_INT 1
+
+
+
+/* Define iterations */
+#if !defined(ITERATIONS) || CRC_CHECK || ITERATIONS==DEFAULT
+#undef ITERATIONS
+#if CRC_CHECK
+#define ITERATIONS 200	/* required iterations for crc */
+#else
+#define ITERATIONS 1	/* recommended iterations for benchmark */
+#endif
+#endif
+
+#if		CRC_CHECK
+#define EXPECTED_CRC 0x0000
+#elif	NON_INTRUSIVE_CRC_CHECK
+#define EXPECTED_CRC 0xd06a
+#else
+#define EXPECTED_CRC 0x0000
+#endif
+
+
+
+/*------------------------------------------------------------------------------
+ * This data type should be set to a type which will hold the larget
+ * benchmark loop count used on your target system.  Generally, this will
+ * be a 16bit or a 32bit unsigned type.
+ *
+ * By default, this type is typedefed as 'size_t'.
+ *----------------------------------------------------------------------------*/
+#define size_t long int
+typedef size_t LoopCount;
+#define e_s32 int
+#define Word  unsigned short
+#define e_u8  unsigned char
+#define e_u16 unsigned int
+#define e_u32 unsigned long
+#define clock_t unsigned long
+
+/*Cpu Cycle*/
+#define __u32 unsigned long
+#define __u64 unsigned long long
+//#define iterations ITERATIONS
+
+/*------------------------------------------------------------------------------
+ * Structures and Typedefs
+
+ * == Test Harness Defintion. ==
+ *
+ * A const pointer to this sturcture is passed to the test component's
+ * entry point.  The TC uses the information in this structure to
+ *
+ *     - determine the identity and other info regarding the tareget system
+ *     - determine the identity and version of the test harness
+ *     - determine the capeabilities of the target system
+ *     - determine the capeabilities of the test harness
+ *     - obtain pointers to the test harness entry points
+*/
+
+/* THDef.revsion == 4  { this is revision 2 of this structure } */
+
+#define THDEF_REVISION (4)
+
+typedef struct TCDef
+
+   {
+   /* Values passed from the Test Harness to the Test Library
+   */
+   char eembc_bm_id[ 16 ];/* id flag */
+   char desc[ 64 ];       /* benchmark description */
+   char member[ 64 ];     /* the member id */
+
+
+
+   }
+TCDef;
+
+
+
+
+typedef struct THTestResults
+   {
+   LoopCount         iterations;
+   e_u32             duration;
+   e_u16	     CRC;
+   size_t            v1;
+   size_t            v2;
+   size_t            v3;
+   size_t            v4;
+   const char *info;
+   }
+THTestResults;
+
+
+
+
+
+static TCDef the_tcdef =
+{
+	"GeMM",
+
+	"RPU: GeMM Benchmark V1.0",
+	"EEMBC Portable Test Harness V4.000"
+
+};
+
+/********************************************************************
+Function:  calc_crc
+Purpose:  Compute crc16 a byte at a time
+Type: PUBLIC
+********************************************************************/
+#if 1
+const e_u16 CRC16Table [256] =
+{
+ 0x0000,0xC0C1,0xC181,0x0140,0xC301,0x03C0,0x0280,0xC241,0xC601,0x06C0,0x0780,0xC741,0x0500,0xC5C1,0xC481,0x0440
+,0xCC01,0x0CC0,0x0D80,0xCD41,0x0F00,0xCFC1,0xCE81,0x0E40,0x0A00,0xCAC1,0xCB81,0x0B40,0xC901,0x09C0,0x0880,0xC841
+,0xD801,0x18C0,0x1980,0xD941,0x1B00,0xDBC1,0xDA81,0x1A40,0x1E00,0xDEC1,0xDF81,0x1F40,0xDD01,0x1DC0,0x1C80,0xDC41
+,0x1400,0xD4C1,0xD581,0x1540,0xD701,0x17C0,0x1680,0xD641,0xD201,0x12C0,0x1380,0xD341,0x1100,0xD1C1,0xD081,0x1040
+,0xF001,0x30C0,0x3180,0xF141,0x3300,0xF3C1,0xF281,0x3240,0x3600,0xF6C1,0xF781,0x3740,0xF501,0x35C0,0x3480,0xF441
+,0x3C00,0xFCC1,0xFD81,0x3D40,0xFF01,0x3FC0,0x3E80,0xFE41,0xFA01,0x3AC0,0x3B80,0xFB41,0x3900,0xF9C1,0xF881,0x3840
+,0x2800,0xE8C1,0xE981,0x2940,0xEB01,0x2BC0,0x2A80,0xEA41,0xEE01,0x2EC0,0x2F80,0xEF41,0x2D00,0xEDC1,0xEC81,0x2C40
+,0xE401,0x24C0,0x2580,0xE541,0x2700,0xE7C1,0xE681,0x2640,0x2200,0xE2C1,0xE381,0x2340,0xE101,0x21C0,0x2080,0xE041
+,0xA001,0x60C0,0x6180,0xA141,0x6300,0xA3C1,0xA281,0x6240,0x6600,0xA6C1,0xA781,0x6740,0xA501,0x65C0,0x6480,0xA441
+,0x6C00,0xACC1,0xAD81,0x6D40,0xAF01,0x6FC0,0x6E80,0xAE41,0xAA01,0x6AC0,0x6B80,0xAB41,0x6900,0xA9C1,0xA881,0x6840
+,0x7800,0xB8C1,0xB981,0x7940,0xBB01,0x7BC0,0x7A80,0xBA41,0xBE01,0x7EC0,0x7F80,0xBF41,0x7D00,0xBDC1,0xBC81,0x7C40
+,0xB401,0x74C0,0x7580,0xB541,0x7700,0xB7C1,0xB681,0x7640,0x7200,0xB2C1,0xB381,0x7340,0xB101,0x71C0,0x7080,0xB041
+,0x5000,0x90C1,0x9181,0x5140,0x9301,0x53C0,0x5280,0x9241,0x9601,0x56C0,0x5780,0x9741,0x5500,0x95C1,0x9481,0x5440
+,0x9C01,0x5CC0,0x5D80,0x9D41,0x5F00,0x9FC1,0x9E81,0x5E40,0x5A00,0x9AC1,0x9B81,0x5B40,0x9901,0x59C0,0x5880,0x9841
+,0x8801,0x48C0,0x4980,0x8941,0x4B00,0x8BC1,0x8A81,0x4A40,0x4E00,0x8EC1,0x8F81,0x4F40,0x8D01,0x4DC0,0x4C80,0x8C41
+,0x4400,0x84C1,0x8581,0x4540,0x8701,0x47C0,0x4680,0x8641,0x8201,0x42C0,0x4380,0x8341,0x4100,0x81C1,0x8081,0x4040
+};
+
+e_u16 Calc_crc8(e_u8 data, e_u16 crc )
+{
+
+    e_u8 idx = (e_u8)(crc&0xff);
+    idx ^= data;
+
+    crc >>= 8;
+    crc ^= CRC16Table[idx];
+
+    return crc;
+}
+
+#else
+e_u16 Calc_crc8(e_u8 data, e_u16 crc )
+{
+	e_u8 i,x16,carry;
+
+	for (i = 0; i < 8; i++)
+    {
+		x16 = (e_u8)((data & 1) ^ ((e_u8)crc & 1));
+		data >>= 1;
+		if (x16 == 1)
+		{
+		   crc ^= 0x4002;
+		   carry = 1;
+		}
+		else carry = 0;
+		crc >>= 1;
+		if (carry)
+		   crc |= 0x8000;
+		else
+		   crc &= 0x7fff;
+    }
+	return crc;
+}
+#endif
+/*********************************************************************/
+e_u16 Calc_crc16( e_u16 data, e_u16 crc )
+{
+
+	crc = Calc_crc8( (e_u8)(data & 0x00FF ), crc );
+	crc = Calc_crc8( (e_u8)((data & 0xFF00)>>8), crc );
+	return crc;
+}
+
+
+/*********************************************************************/
+e_u16 Calc_crc32( e_u32 data, e_u16 crc )
+{
+
+	crc = Calc_crc8( (e_u8)(data & 0x000000FF), crc );
+	crc = Calc_crc8( (e_u8)((data & 0x0000FF00)>>8), crc );
+	crc = Calc_crc8( (e_u8)((data & 0x00FF0000)>>16), crc );
+	crc = Calc_crc8( (e_u8)((data & 0xFF000000)>>24), crc );
+
+	return crc;
+}
+
+
+/*****************************************************
+******************************************************
+******************************************************
+*****************log 输出*****************************
+******************************************************
+******************************************************
+******************************************************/
+
+
+
+
+/*------------------------------------------------------------------------------
+ * FUNC   : report_info
+ *
+ * DESC   : Reports the system info to the use or HCP
+ * ---------------------------------------------------------------------------*/
+
+static void report_info( void )
+{
+      rpu_thu_printf( ">> TH: %s\n", the_tcdef.member );
+      rpu_thu_printf( ">> BM: %s\n", the_tcdef.desc );
+      rpu_thu_printf( ">> ID: %s\n", the_tcdef.eembc_bm_id );
+}
+
+/*------------------------------------------------------------------------------
+ * FUNC   : i_report_results
+ *
+ * DESC   : functional layer implimentation of th_report_results()
+ * ---------------------------------------------------------------------------*/
+
+int i_report_results( const THTestResults *results, e_u16 Expected_CRC )
+{
+
+
+#if		GREP_COPROCESSOR_ENABLE
+rpu_thu_printf(  "--  GRep CoProcessor is enable.\n");
+#endif
+
+#if		CRC_CHECK
+rpu_thu_printf(  "--  Intrusive CRC     = %4x\n",results->CRC);
+#elif	NON_INTRUSIVE_CRC_CHECK
+rpu_thu_printf(  "--  Non-Intrusive CRC = %4x\n",results->CRC);
+#else
+rpu_thu_printf(  "--  No CRC check      = 0000\n");
+#endif
+rpu_thu_printf(  "--  Iterations        = %5lu\n", results->iterations );
+rpu_thu_printf(  "--  Target Duration   = %5lu\n", results->duration );
+#if		VERIFY_INT
+rpu_thu_printf(  "--  v1                = %ld\n", results->v1);
+rpu_thu_printf(  "--  v2                = %ld\n", results->v2);
+rpu_thu_printf(  "--  v3                = %ld\n", results->v3);
+rpu_thu_printf(  "--  v4                = %ld\n", results->v4);
+#endif
+#if		VERIFY_FLOAT && FLOAT_SUPPORT
+dunion.v[0]	= results->v1;
+dunion.v[1] = results->v2;
+rpu_thu_printf(  "--  v1v2              = %f\n", dunion.d);
+dunion.v[0]	= results->v3;
+dunion.v[1] = results->v4;
+rpu_thu_printf(  "--  v3v4              = %f\n", dunion.d);
+#endif
+
+
+
+#if (RPU_THU_UART_ENABLE==0)
+   if (results -> info != NULL && results -> info[ 0 ] != '\0')
+      rpu_thu_printf( "-- Info             = %s\n", results -> info );
+#endif
+
+   /* Failure Section */
+#if		CRC_CHECK || NON_INTRUSIVE_CRC_CHECK
+	/*if( results->CRC != Expected_CRC ){
+		rpu_thu_printf("--  Failure: Actual CRC %x, Expected CRC %x\n",results->CRC,Expected_CRC);
+		//exit_code = Failure;
+	}*/
+#endif
+ //rpu_thu_printf( "--  Total Run Cycle  = %lld cycle\n", (stop_time_cycle-start_time_cycle));
+
+	return	0;
+}
+
+
+/*****************************************************
+******************************************************
+******************************************************
+*****************算法映射****************************
+******************************************************
+******************************************************
+******************************************************/
+
+/*
+ * Local Declarations
+ */
+/* encapsulated data */ 
+#define N 32
+unsigned int rpu_thu_app_filter[] __attribute__ ((aligned (128)))= {
+#ifdef __DEFINE_BUILD_STAGE__
+	#include "ARM7/__gr_task_gemm.arm"
+#endif
+};
+unsigned int rpu_thu_app_size = sizeof(rpu_thu_app_filter);
+
+unsigned int config_pack_gemm1[] __attribute__ ((aligned (64),section("ext_mem_data"))) = {
+		#include "ConfigPack_gemm1.h"
+	};
+static unsigned int config_pack_gemm_line1 __attribute__ ((aligned (128),section("ext_mem_data")))= sizeof(config_pack_gemm1)>>3;
+
+unsigned int config_pack_gemm2[] __attribute__ ((aligned (64),section("ext_mem_data"))) = {
+		#include "ConfigPack_gemm2.h"
+	};
+static unsigned int config_pack_gemm_line2 __attribute__ ((aligned (128),section("ext_mem_data")))= sizeof(config_pack_gemm2)>>3;
+
+static int matA[N*N] __attribute__ ((aligned (64),section("ext_mem_data")))={
+#include "matrixA.dat"
+};
+
+static int matB[N*N] __attribute__ ((aligned (64),section("ext_mem_data")))={
+#include "matrixB.dat"
+};
+
+static int temp[256] __attribute__ ((aligned (64),section("ext_mem_data")))={0};
+
+static int matC[N*N] __attribute__ ((aligned (64),section("ext_mem_data")))={0};
+
+#if GREP_COPROCESSOR_ENABLE == 0
+
+#elif SOFT_RPU_ENABLE
+
+#else
+/*
+__gr_pea void  gemm1(int* A, int*B, int*C)
+{
+	__gr_malloc(A, 0);
+	__gr_malloc(B, 512);
+	__gr_malloc(C, 1024);
+	for (int i = 0; i < 8; i++)
+	{
+		for (int j = 0; j < 16; j=j+8)
+		{
+			for (int k = 0; k < 16; k++)
+			{
+				C[i * 16 + j] = A[i * 16 + k] * B[k * 16 + j] + C[i * 16 + j];
+				C[i * 16 + j+1] = A[i * 16 + k] * B[k * 16 + j+1] + C[i * 16 + j+1];
+				C[i * 16 + j+2] = A[i * 16 + k] * B[k * 16 + j+2] + C[i * 16 + j+2];
+				C[i * 16 + j+3] = A[i * 16 + k] * B[k * 16 + j+3] + C[i * 16 + j+3];
+				C[i * 16 + j+4] = A[i * 16 + k] * B[k * 16 + j+4] + C[i * 16 + j+4];
+				C[i * 16 + j+5] = A[i * 16 + k] * B[k * 16 + j+5] + C[i * 16 + j+5];
+				C[i * 16 + j+6] = A[i * 16 + k] * B[k * 16 + j+6] + C[i * 16 + j+6];
+				C[i * 16 + j+7] = A[i * 16 + k] * B[k * 16 + j+7] + C[i * 16 + j+7];
+
+			}
+		}
+	}
+}
+
+
+__gr_pea void gemm2(int* A, int*B, int*C)
+{
+	__gr_malloc(A, 0);
+	__gr_malloc(B, 512);
+	__gr_malloc(C, 1024);
+	for (int i = 8; i < 16; i++)
+	{
+		for (int j = 0; j < 16; j=j+8)
+		{
+			for (int k = 0; k < 16; k++)
+			{
+				C[i * 16 + j] = A[i * 16 + k] * B[k * 16 + j] + C[i * 16 + j];
+				C[i * 16 + j+1] = A[i * 16 + k] * B[k * 16 + j+1] + C[i * 16 + j+1];
+				C[i * 16 + j+2] = A[i * 16 + k] * B[k * 16 + j+2] + C[i * 16 + j+2];
+				C[i * 16 + j+3] = A[i * 16 + k] * B[k * 16 + j+3] + C[i * 16 + j+3];
+				C[i * 16 + j+4] = A[i * 16 + k] * B[k * 16 + j+4] + C[i * 16 + j+4];
+				C[i * 16 + j+5] = A[i * 16 + k] * B[k * 16 + j+5] + C[i * 16 + j+5];
+				C[i * 16 + j+6] = A[i * 16 + k] * B[k * 16 + j+6] + C[i * 16 + j+6];
+				C[i * 16 + j+7] = A[i * 16 + k] * B[k * 16 + j+7] + C[i * 16 + j+7];
+
+			}
+		}
+	}
+}
+
+	*/
+
+__gr_task void gemm(int *matA, int *matB,int *matC, int *temp, unsigned int* config_pack_gemm1,unsigned int config_pack_gemm_line1,unsigned int* config_pack_gemm2,unsigned int config_pack_gemm_line2)
+{
+	int i,j;
+	int index;
+	//temp
+	__gr_MemcopyGtoS(0,temp,1024,256);
+	__gr_MemcopyGtoS(1,temp,1024,256);
+	__gr_MemcopyGtoS(2,temp,1024,256);
+	__gr_MemcopyGtoS(3,temp,1024,256);
+	
+	for(index=0; index<16; index++)
+	{
+		//matrix_A&&matrix_B
+		__gr_MemcopyGtoS(0,matA+index*32,0+index*16,16);	 	//将A1中数据拷贝到0+index*16的位置
+		__gr_MemcopyGtoS(0,matB+index*32,512+index*16,16);	//将B5中数据拷贝到512+index*16的位置
+		
+		__gr_MemcopyGtoS(1,matA+index*32,0+index*16,16);		//A1
+		__gr_MemcopyGtoS(1,matB+16+index*32,512+index*16,16);//B6
+		
+		__gr_MemcopyGtoS(2,matA+512+index*32,0+index*16,16);	//A3
+		__gr_MemcopyGtoS(2,matB+index*32,512+index*16,16);	//B5
+		
+		__gr_MemcopyGtoS(3,matA+512+index*32,0+index*16,16);	//A3
+		__gr_MemcopyGtoS(3,matB+16+index*32,512+index*16,16);//B6
+	}
+
+		
+		//处理
+    	__gr_callPEA(0,"GeMM",config_pack_gemm1, config_pack_gemm_line1);
+		__gr_callPEA(1,"GeMM",config_pack_gemm1, config_pack_gemm_line1);
+		__gr_callPEA(2,"GeMM",config_pack_gemm1, config_pack_gemm_line1);
+		__gr_callPEA(3,"GeMM",config_pack_gemm1, config_pack_gemm_line1);
+		__gr_synPEA(1, 1, 1, 1);
+		
+		__gr_callPEA(0,"GeMM",config_pack_gemm2, config_pack_gemm_line2);			
+		__gr_callPEA(1,"GeMM",config_pack_gemm2, config_pack_gemm_line2);
+		__gr_callPEA(2,"GeMM",config_pack_gemm2, config_pack_gemm_line2);			
+		__gr_callPEA(3,"GeMM",config_pack_gemm2, config_pack_gemm_line2);
+		__gr_synPEA(1, 1, 1, 1);
+			
+	for(index=0; index<16; index++)
+	{		
+		__gr_MemcopyGtoS(0,matA+16 +index*32,  0+index*16,16);	//A2
+		__gr_MemcopyGtoS(0,matB+512+index*32,512+index*16,16);	//B7
+		
+		__gr_MemcopyGtoS(1,matA+16+index*32,0+index*16,16);		//A2
+		__gr_MemcopyGtoS(1,matB+512+16+index*32,512+index*16,16);//B8
+		
+		__gr_MemcopyGtoS(2,matA+512+16+index*32,0+index*16,16);	//A4
+		__gr_MemcopyGtoS(2,matB+512+index*32,512+index*16,16);	//B7
+		
+		__gr_MemcopyGtoS(3,matA+512+16+index*32,0+index*16,16);	//A4
+		__gr_MemcopyGtoS(3,matB+512+16+index*32,512+index*16,16);//B8
+	}	
+		
+		//处理
+		__gr_callPEA(0,"GeMM",config_pack_gemm1, config_pack_gemm_line1);
+		__gr_callPEA(1,"GeMM",config_pack_gemm1, config_pack_gemm_line1);
+		__gr_callPEA(2,"GeMM",config_pack_gemm1, config_pack_gemm_line1);
+		__gr_callPEA(3,"GeMM",config_pack_gemm1, config_pack_gemm_line1);
+		__gr_synPEA(1, 1, 1, 1);
+		
+		__gr_callPEA(0,"GeMM",config_pack_gemm2, config_pack_gemm_line2);			
+		__gr_callPEA(1,"GeMM",config_pack_gemm2, config_pack_gemm_line2);
+		__gr_callPEA(2,"GeMM",config_pack_gemm2, config_pack_gemm_line2);			
+		__gr_callPEA(3,"GeMM",config_pack_gemm2, config_pack_gemm_line2);
+		__gr_synPEA(1, 1, 1, 1);
+		
+    for(index=0; index<16; index++)
+	{	
+		//输出
+    	__gr_MemcopyStoG(0,matC+index*32,1024+index*16,16);//C0
+		__gr_MemcopyStoG(1,matC+16    +index*32,1024+index*16,16);//C1
+		__gr_MemcopyStoG(2,matC+512   +index*32,1024+index*16,16);//C2
+		__gr_MemcopyStoG(3,matC+512+16+index*32,1024+index*16,16);//C3
+    	__gr_synPEA(1, 1, 1, 1);
+
+	}
+   /*for(i=0;i<N*N;i++)
+rpu_thu_printf(  "MATC = %d\n", matC[i]);
+*/
+}
+
+
+#endif
+
+/*------------------------------------------------------------------------------
+ * FUNC   : t_run_test
+ *
+ * DESC   : called to run the test
+ *
+ *          This function is called to start the test.  It does not return
+ *          until after the test is completed (finished).  Note, th_finished()
+ *          and th_report_results() MUST be called before this funct1376ion
+ *          returns if results are to be report.  If these are not called
+ *          then no results will be reported for the test.
+ *         
+ * NOTE   : after this function returns, no other functions in the test
+ *          will be called.  EG, returning from this function is equivelent
+ *          to returning from a main() or calling th_exit()
+ *
+ * RETURNS: Success if the test ran fine.  If th_finished() and
+ *          th_report_results() were not called, then the test finished
+ *          successfully, but there were no results and the host will
+ *          not be able to measure the test's duration.
+ * ---------------------------------------------------------------------------*/
+
+int t_run_test()
+{
+    size_t         loop_cnt; /* Actual Iterations */
+    THTestResults  results;
+    static char    info[64]; /* must be static */
+
+    e_s32          i,j;
+     
+	/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+	 * input and output buffer which should allocate in the external memory and should be static allocate
+	 */
+
+
+	/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+	 * First, initialize the data structures we need for the test
+	 */
+    //rpu_thu_printf( "READY FOR APPTABLE\n");
+    __gr_updateAppTable(0x4a5b3321,"gemm_app",rpu_thu_app_filter, rpu_thu_app_size);
+    //rpu_thu_printf( "DONE FOR APPTABLE\n");
+    //reset rpu_thu0
+    // *(volatile unsigned int *)(0xa0003008)=0x00000001; //set RESET active
+
+
+   /*
+    * This is the actual benchmark
+    */
+#if GREP_COPROCESSOR_ENABLE == 0
+	gemm_atom(autodata,output);
+#elif SOFT_RPU_ENABLE 	    
+	gemm_soft(autodata,output);
+#else
+ 	__gr_syn gemm(matA,matB,matC, temp, config_pack_gemm1, config_pack_gemm_line1,config_pack_gemm2, config_pack_gemm_line2);
+#endif
+
+   	//results.duration   = th_signal_finished();  /* signal that we are finished */
+
+	results.iterations = ITERATIONS;
+	results.v1         = 0;
+	results.v2         = 0;
+	results.v3         = 0;
+	results.v4         = 0;
+	results.info       = info;
+
+#if	NON_INTRUSIVE_CRC_CHECK
+	results.CRC=0;
+	for (i=0;i<N*N;i++)
+           results.CRC=Calc_crc32(matC[i],results.CRC);
+	for(i=0;i<N*N;i++)
+rpu_thu_printf(  "MATC = %d\n", matC[i]);
+#elif	CRC_CHECK
+	results.CRC=0;
+#else
+	results.CRC=0;
+#endif
+	return i_report_results(&results, EXPECTED_CRC);
+}
+
+int  main( )
+{
+
+/********************************************************/
+   // rpu_thu_ddr_init();
+
+      rpu_thu_init();
+    //rpu_thu_uart_init();
+/********************************************************/
+
+
+    report_info();
+    t_run_test();
+    report_info();
+    rpu_thu_printf( "--  Total Run Cycle  = %ld cycle\n", *(volatile unsigned int *)(0x17000000));
+
+    //transfer rpu_thu execute code
+   // rpu_thu_dmac_start((unsigned int)asc_slave_0, 0x0, asc_slave_0_size );
+
+    //reset rpu_thu0
+    //*(volatile unsigned int *)(0xa0003008)=0x00000001; //set RESET active
+
+    while(1); 
+
+    return 0;
+}
