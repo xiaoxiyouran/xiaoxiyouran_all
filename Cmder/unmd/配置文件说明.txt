@@ -1,0 +1,2 @@
+该配置文件可以导出也可以导入。
+所i在路径，在文件夹放的： D:\cmder\vendor\conemu-maximus5\ConEmu.xml

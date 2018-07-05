@@ -1,0 +1,6 @@
+F:\xiaoxiyouran_tmp\C# 菜鸟教程\Csharp_test\Csharp_test\bin\Debug\Csharp_test.exe.config
+F:\xiaoxiyouran_tmp\C# 菜鸟教程\Csharp_test\Csharp_test\bin\Debug\Csharp_test.exe
+F:\xiaoxiyouran_tmp\C# 菜鸟教程\Csharp_test\Csharp_test\bin\Debug\Csharp_test.pdb
+F:\xiaoxiyouran_tmp\C# 菜鸟教程\Csharp_test\Csharp_test\obj\Debug\Csharp_test.csprojResolveAssemblyReference.cache
+F:\xiaoxiyouran_tmp\C# 菜鸟教程\Csharp_test\Csharp_test\obj\Debug\Csharp_test.exe
+F:\xiaoxiyouran_tmp\C# 菜鸟教程\Csharp_test\Csharp_test\obj\Debug\Csharp_test.pdb

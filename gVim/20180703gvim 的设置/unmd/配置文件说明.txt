@@ -1,0 +1,2 @@
+该配置文件在安装目录下： D:\Program Files (x86)\20180723Vim\_vimrc
+装完后，BundleInstall 即可
