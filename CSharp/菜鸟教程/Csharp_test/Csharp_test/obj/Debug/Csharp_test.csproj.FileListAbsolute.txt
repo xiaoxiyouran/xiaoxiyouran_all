@@ -11,3 +11,10 @@ F:\xiaoxiyouran_tmp\xiaoxiyouran\xiaoxiyouran_all\CSharp\菜鸟教程\Csharp_tes
 F:\xiaoxiyouran_tmp\xiaoxiyouran\xiaoxiyouran_all\CSharp\菜鸟教程\Csharp_test\Csharp_test\obj\Debug\Csharp_test.csproj.CoreCompileInputs.cache
 F:\xiaoxiyouran_tmp\xiaoxiyouran\xiaoxiyouran_all\CSharp\菜鸟教程\Csharp_test\Csharp_test\obj\Debug\Csharp_test.exe
 F:\xiaoxiyouran_tmp\xiaoxiyouran\xiaoxiyouran_all\CSharp\菜鸟教程\Csharp_test\Csharp_test\obj\Debug\Csharp_test.pdb
+F:\xiaoxiyouran_tmp\xiaoxiyouran\src\CSharp\菜鸟教程\Csharp_test\Csharp_test\bin\Debug\Csharp_test.exe.config
+F:\xiaoxiyouran_tmp\xiaoxiyouran\src\CSharp\菜鸟教程\Csharp_test\Csharp_test\bin\Debug\Csharp_test.exe
+F:\xiaoxiyouran_tmp\xiaoxiyouran\src\CSharp\菜鸟教程\Csharp_test\Csharp_test\bin\Debug\Csharp_test.pdb
+F:\xiaoxiyouran_tmp\xiaoxiyouran\src\CSharp\菜鸟教程\Csharp_test\Csharp_test\obj\Debug\Csharp_test.csprojAssemblyReference.cache
+F:\xiaoxiyouran_tmp\xiaoxiyouran\src\CSharp\菜鸟教程\Csharp_test\Csharp_test\obj\Debug\Csharp_test.csproj.CoreCompileInputs.cache
+F:\xiaoxiyouran_tmp\xiaoxiyouran\src\CSharp\菜鸟教程\Csharp_test\Csharp_test\obj\Debug\Csharp_test.exe
+F:\xiaoxiyouran_tmp\xiaoxiyouran\src\CSharp\菜鸟教程\Csharp_test\Csharp_test\obj\Debug\Csharp_test.pdb
