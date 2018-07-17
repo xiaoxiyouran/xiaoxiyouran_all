@@ -1,4 +1,4 @@
-#[easy,math]121. Best Time to Buy and Sell Stock
+# [easy,math]121. Best Time to Buy and Sell Stock
 
 Say you have an array for which the *i*th element is the price of a given stock on day *i*.
 
