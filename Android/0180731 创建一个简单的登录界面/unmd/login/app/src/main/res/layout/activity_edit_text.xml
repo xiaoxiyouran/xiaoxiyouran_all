@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--改成相对布局，
+并删掉没用的信息,
+设置内边距15个dp-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    >
+
+    <!--设置输入文字大小，
+    并设置颜色为橙色
+    弹出数字键盘：  android:inputType="number"
+    设置圆角边框
+    设置左右内间距
+    左边设置图标
+    设置图标的距离
+    设置最大行数： 1行
+
+    设置顶部间距
+    -->
+    <EditText
+        android:id="@+id/et_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="16sp"
+        android:textColor="#FFAD33"
+        android:hint="用户名"
+        android:background="@drawable/bg_username"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:drawablePadding="5dp"
+        android:drawableLeft="@drawable/icon_user"
+
+        android:maxLines="1"
+
+        android:layout_marginTop="50dp"
+        />
+    <!-- 设置密码框在用户名的下方，
+       并设置顶间距
+       设置密码格式为密文： android:inputType="textPassword"
+       -->
+    <EditText
+        android:id="@+id/et_2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="16sp"
+        android:textColor="#FFAD33"
+        android:inputType="textPassword"
+        android:hint="密码"
+        android:layout_below="@id/et_1"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/bg_username"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+
+        android:maxLines="1"
+
+        android:drawablePadding="5dp"
+        android:drawableLeft="@drawable/icon_password"
+        />
+
+    <!--设置按钮按压变色 bg_btn4.xml
+
+    设置文字的颜色为白色
+    -->
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/et_2"
+        android:layout_marginTop="40dp"
+
+        android:text="登录"
+        android:background="@drawable/bg_btn4"
+
+        android:textColor="#fff"
+        android:textSize="20sp"
+        />
+
+</RelativeLayout>
