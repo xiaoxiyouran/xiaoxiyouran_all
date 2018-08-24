@@ -1,104 +1,105 @@
+//#include "GlobalHead.h"
+
 #include <iostream>
-#include <unordered_map>
 #include <vector>
 using namespace std;
 
-struct qu{
-    int index;
+struct  TreeNode{
     int val;
-    int dui;
-    qu(int index, int val)
-    {
-        this->index = index;
-        this-> val = val;
-    }
+    int time;
+    vector<TreeNode *> next;
+    TreeNode(int val, int time ): val(val), time(time){}
 };
 
 
-bool compare(const qu st1, const qu st2){
-    return st1.val < st2.val;       // 从小到大排序
-}
-
-bool compare2(const qu st1, const qu st2){
-    return st1.index < st2.index;   // 从小到大排序
-}
-
-
-int search(vector<int> & vec, int target){
-    int left = 0;
-    int right = vec.size() -1;
-    while (left <= right){
-        int mid = (left + right)/2;
-        if( vec[mid] >= target ){
-            if( (mid -1 >=0 && vec[mid-1] <= target) || mid ==0 ){
-                return mid;
-            }
-        }
-
-        if (target>= vec[mid])
-            left = mid + 1;
-        else
-            right = mid -1;
+void traverse(TreeNode *root, int& res, int& curLen, int& paths ){
+    if(root -> next.size() == 0){
+        paths++;
+        res  = (res < curLen) ? curLen:res;
+        return;
     }
-    return  -1;
+
+    for(int i=0; i < root -> next.size(); i++){
+        curLen += root->next[i] -> time;
+        traverse(root->next[i],  res, curLen, paths );
+        curLen -= root->next[i] -> time;
+    }
 }
 
 int main() {
-    int n;
-    cin >> n;
-    vector<int> dui_apple;
-    for( int i=0; i<n; i++ ){
-        int k;
-        cin >> k;
+    int systems, yilai;
+    cin >> systems;
+    cin >> yilai;
 
-        dui_apple.push_back(k);
-
+    vector<TreeNode> time;
+    for(int i = 0; i< systems; i ++){
+        int ti;
+        cin >> ti;
+        TreeNode nn(i, ti);
+        time.push_back(nn);
     }
 
-    int query;
-    cin >> query;
-    vector<int> query_arr;
-    vector<qu> querr;
-    for( int i=0; i<query; i++ ){
-        int k;
-        cin >> k;
-        qu tmp(i, k);
-        query_arr.push_back(k);
-        querr.push_back(tmp);
+    vector<bool> vec(systems, false);
+    for(int i=0; i< yilai; i++){
+        int one, two;
+        cin >> one;
+        cin >> two;
+        time[one-1].next.push_back(&time[two-1]);
+        vec[two-1] = true;
     }
 
-    sort(querr.begin(), querr.end(), compare);
-    vector<int> sum_arr(dui_apple.size(),0);
-    for( int i=0; i < dui_apple.size(); i++ ){
-        if(i == 0)
-            sum_arr[i] = dui_apple[i];
-        else
-            sum_arr[i] = sum_arr[i-1] + dui_apple[i];
+//    vector<bool> vec(systems, false);
+//    for(int i=0; i < systems; i++){
+//        for(int j=0; j < time[i].next.size(); j++){
+//            vec[time[i].next[j]->val] = true;
+//        }
+//    }
+
+    vector<int> only;
+    for( int i=0; i< vec.size(); i++ ){
+        if (vec[i] == false)
+            only.push_back(i);
     }
 
-
-//    cout << search(sum_arr, querr) + 1 << endl;
-    int p1 = 0, p2 = 0;
-    for(int i = 0; i<sum_arr.size(); i++){
-            while( sum_arr[i] >= querr[p2].val && p2 < querr.size()){
-                if( (i -1 >=0 && sum_arr[i-1] <= querr[p2].val) || i ==0 ){
-                    querr[p2].dui = i+1;
-                    p2++;
-            }
-        }
+    int res = 0;
+    int paths = 0;
+    for (int i = 0; i < only.size(); i++){
+        TreeNode& head = time[only[i]];
+        int curLen = head.time;
+        traverse(&head, res, curLen, paths );
     }
 
-    sort(querr.begin(), querr.end(), compare2);
-    for(int i =0; i< querr.size(); i++){
-        cout << querr[i].dui << std::endl;
-    }
-//    std::cout<<"Hello, World!"<<std::endl;
+    cout << paths << "\t" << res << endl;
+
     return 0;
 }
-/*output:
+
+
+
+/* input
+5 4
+2
 5
-2 7 3 4 9
-3
-1 25 11
+4
+6
+6
+1 2
+1 3
+2 5
+4 5
+ */
+
+/* output
+5 4
+2
+5
+4
+6
+6
+1 2
+1 3
+2 5
+4 5
+13	3
 
 */

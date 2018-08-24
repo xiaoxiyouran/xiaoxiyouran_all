@@ -6,10 +6,20 @@
 
 #IncludeRegexTransform: 
 
-/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/main.cpp
+/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GeneralPrint.cpp
+GeneralPrint.h
+/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GeneralPrint.h
+
+/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GeneralPrint.h
 iostream
 -
+vector
+-
 unordered_map
+-
+
+/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/main.cpp
+iostream
 -
 vector
 -
