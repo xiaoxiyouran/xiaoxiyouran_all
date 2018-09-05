@@ -56,26 +56,26 @@ int main() {
     for(auto it = zhangai.begin(); it!=zhangai.end(); it++){
         vector<int>& currColx = it->second;
         curCol = it -> first;
-
+        
         // 处理刚开始非障碍物的列
         for(int i=startCol; i < curCol; i ++){
             processNoX( mat, i, 0, row);
         }
         startCol = curCol+1;        // 更新下一次开始的列
-
+        
         // 处理带障碍物的列，假设该列有多个障碍物 x
         int start = 0;
         for( int t = 0; t < currColx.size(); t++ ){
             process(mat, curCol, start, currColx[t]);
             start = currColx[t] + 1;
         }
-
+        
         // 处理该列剩下可能不带障碍物的
         if( currColx[currColx.size()-1] != (row-1)){
             processNoX( mat, curCol, start, row);
         }
     }
-
+    
     // 处理障碍物后面可能还有不带障碍物的列
     for(int i=startCol; i < col; i ++){
         processNoX( mat, i, 0, row);

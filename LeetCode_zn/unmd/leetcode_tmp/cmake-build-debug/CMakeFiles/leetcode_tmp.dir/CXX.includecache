@@ -18,25 +18,7 @@ vector
 unordered_map
 -
 
-/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GlobalFunc.h
-vector
--
-string
--
-sstream
--
-algorithm
--
-
-/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GlobalHead.h
-GlobalFunc.h
-/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GlobalFunc.h
-GeneralPrint.h
-/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GeneralPrint.h
-
 /Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/main.cpp
-GlobalHead.h
-/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GlobalHead.h
 iostream
 -
 vector
