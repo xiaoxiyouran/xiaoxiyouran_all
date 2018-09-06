@@ -1,93 +1,49 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <stack>
+
 using namespace std;
 
-// 处理带障碍物 x 的列
-void process( vector<vector<char>> & mat, int col, int start, int end){
-    int circle = 0;
-    for( int i = start; i < end; i ++){
-        if( mat[i][col] == 'o' )
-            circle++;
+int MinInOrder(int* numbers, int index1, int index2){
+    int result = numbers[index1];
+    for(int i = index1 + 1; i <= index2; i++){
+        if( result > numbers[i] )
+            result = numbers[i];
     }
-
-    for( int i = start; i < end; i ++){
-        if(i < end-circle)
-            mat[i][col] = '.';
-        else
-            mat[i][col] = 'o';
-    }
-
+    return  result;
 }
 
-// 处理没有障碍物的列
-void processNoX( vector<vector<char>> & mat, int col, int start, int end){
-    for( int i = start; i < end; i ++){
-        mat[i][col] = '.';
+int Min(int* numbers, int length){
+    if ( numbers == NULL || length <=0 )
+        throw new std::invalid_argument("Invalid parameters.");
+    int index1 = 0;
+    int index2 = length - 1;
+    int indexMid = index1;
+    while (numbers[index1] >= numbers[index2]){
+        if (index2 - index1 == 1){      // 前面比后面大， 刚好找到最小值
+            indexMid = index2;
+            break;
+        }
+
+        indexMid = (index1 + index2) / 2;
+
+        // 如果三者相等，只能顺序查找
+        if (numbers[index1] == numbers[index2] && numbers[indexMid] == numbers[index1] )
+            return MinInOrder(numbers, index1, index2);
+
+        if ( numbers[indexMid] >= numbers[index1] )
+            index1 = indexMid;
+        else if (numbers[indexMid] <= numbers[index2] )
+            index2 = indexMid;
     }
+
+    return numbers[indexMid];
 }
 
 int main() {
-    int row, col;
-    cin >> row;
-    cin >> col;
-    map<int, vector<int>> zhangai;
-    vector<vector<char>> mat(row, vector<char>(col));//这里，两个“>”间的空格是不可少的;
-
-    for( int i = 0; i < row; i ++ )
-        for( int j=0; j < col; j++ ){
-            char tmp;
-            cin >> tmp;
-            mat[i][j] = tmp;
-            if( tmp == 'x' ){
-                if( zhangai.find(j) == zhangai.end() ){
-                    vector<int> tmp;
-                    tmp.push_back(i);
-                    zhangai[j] = tmp;
-                }
-                else{
-                    zhangai[j].push_back(i);
-                }
-            }
-        }
-
-    int startCol = 0;
-    int curCol = 0;
-    for(auto it = zhangai.begin(); it!=zhangai.end(); it++){
-        vector<int>& currColx = it->second;
-        curCol = it -> first;
-
-        // 处理刚开始非障碍物的列
-        for(int i=startCol; i < curCol; i ++){
-            processNoX( mat, i, 0, row);
-        }
-        startCol = curCol+1;        // 更新下一次开始的列
-
-        // 处理带障碍物的列，假设该列有多个障碍物 x
-        int start = 0;
-        for( int t = 0; t < currColx.size(); t++ ){
-            process(mat, curCol, start, currColx[t]);
-            start = currColx[t] + 1;
-        }
-
-        // 处理该列剩下可能不带障碍物的
-        if( currColx[currColx.size()-1] != (row-1)){
-            processNoX( mat, curCol, start, row);
-        }
-    }
-
-    // 处理障碍物后面可能还有不带障碍物的列
-    for(int i=startCol; i < col; i ++){
-        processNoX( mat, i, 0, row);
-    }
-
-    // 输出结果
-    for(int i=0; i < row; i++){
-        for(int j=0; j< col; j++)
-            cout << mat[i][j];
-        cout<<endl;
-    }
-
+   int numbers[5] = {1, 0, 1, 1, 1};
+    cout << Min(numbers, 5) << endl;    // 0
 
     return 0;
 }
