@@ -8,8 +8,10 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <map>
 using std::vector;
 using std::unordered_map;
+using std::multimap;
 
 namespace general{
     struct ListNode {
@@ -45,6 +47,15 @@ namespace general{
         }
         std::cout << std::endl;
     };
+
+//    template <typename T, typename U>
+//    void print_multimap(const multimap<T, U>& multimap){
+//        typedef typename multimap<T, U>::const_iterator iterator;
+//        for( iterator it = multimap.begin(); it != multimap.end(); it++ ){
+//            std::cout << it-> first << ":" << it->second << '\t';
+//        }
+//        std::cout << std::endl;
+//    };
 
 
 }

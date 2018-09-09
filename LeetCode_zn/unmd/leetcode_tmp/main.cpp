@@ -1,49 +1,53 @@
-#include <iostream>
-#include <vector>
-#include <map>
-#include <stack>
-
+#pragma warning(disable:4786)
+#include<map>
+#include<iostream>
 using namespace std;
 
-int MinInOrder(int* numbers, int index1, int index2){
-    int result = numbers[index1];
-    for(int i = index1 + 1; i <= index2; i++){
-        if( result > numbers[i] )
-            result = numbers[i];
-    }
-    return  result;
-}
+int main(void)
+{
+    multimap<int,char*> m;
 
-int Min(int* numbers, int length){
-    if ( numbers == NULL || length <=0 )
-        throw new std::invalid_argument("Invalid parameters.");
-    int index1 = 0;
-    int index2 = length - 1;
-    int indexMid = index1;
-    while (numbers[index1] >= numbers[index2]){
-        if (index2 - index1 == 1){      // 前面比后面大， 刚好找到最小值
-            indexMid = index2;
-            break;
-        }
 
-        indexMid = (index1 + index2) / 2;
+    typedef pair<int,char* > PAIR;
+    //multimap的插入只能用insert()不能用数组
+    m.insert(PAIR(1,"apple"));
+    m.insert(pair<int,char*>(1,"pear"));//apple和pear的价钱完全有可能是一样的
+    m.insert(pair<int,char*>(2,"banana"));
 
-        // 如果三者相等，只能顺序查找
-        if (numbers[index1] == numbers[index2] && numbers[indexMid] == numbers[index1] )
-            return MinInOrder(numbers, index1, index2);
-
-        if ( numbers[indexMid] >= numbers[index1] )
-            index1 = indexMid;
-        else if (numbers[indexMid] <= numbers[index2] )
-            index2 = indexMid;
+    //multimap的遍历只能用迭代器方式不能用数组
+    cout<<"***************************************"<<endl;
+    multimap<int,char*>::iterator i,iend = m.end();
+    for(i=m.begin();i!=iend;i++)
+    {
+        cout<<(*i).second<<"的价钱是"
+            <<(*i).first<<"元/斤\n";
     }
 
-    return numbers[indexMid];
-}
+    cout<<"***************************************"<<endl;
+    //元素的反向遍历
+    multimap<int,char*>::reverse_iterator j,jend;
+    jend=m.rend();
+    for(j=m.rbegin();j!=jend;j++)
+    {
+        cout<<(*j).second<<"的价钱是"
+            <<(*j).first<<"元/斤\n";
+    }
 
-int main() {
-   int numbers[5] = {1, 0, 1, 1, 1};
-    cout << Min(numbers, 5) << endl;    // 0
-
+    cout<<"***************************************"<<endl;
+    //元素的搜索find(),pair<iterator,iterator>equal_range(const key_type &k)const
+    //和multiset的用法一样
+    multimap<int,char*>::iterator s;
+    s=m.find(1);//find()只要找到一个就行了，然后立即返回。
+    cout<<(*s).second<<"    "
+        <<(*s).first<<endl;
+    cout<<"键值等于1的元素个数是："<<m.count(1)<<endl;
+    cout<<"***************************************"<<endl;
+    //删除 erase(),clear()
+    m.erase(1);
+    for(i=m.begin();i!=iend;i++)
+    {
+        cout<<(*i).second<<"的价钱是"
+            <<(*i).first<<"元/斤\n";
+    }
     return 0;
 }
