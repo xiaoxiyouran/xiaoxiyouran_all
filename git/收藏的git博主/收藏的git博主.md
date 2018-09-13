@@ -10,6 +10,10 @@ https://github.com/litten， 他的hexo博客不错，还有那个相册，是�
 
 二维码生成链接，也需要时间去学习呀。
 
+https://github.com/crystalYY/blog 她是一个山大很漂亮的妹子， 也是用这个模板做的[博客](http://tinyfirefly.com/)
+
+
+
 
 
 
