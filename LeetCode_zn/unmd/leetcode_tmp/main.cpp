@@ -1,53 +1,117 @@
-#pragma warning(disable:4786)
-#include<map>
+#include<stdio.h>
+#include<string.h>
 #include<iostream>
+#include<functional>
+#include<queue>
+#include<set>
+#include<string>
+#include<unordered_map>
+#include<map>
+#include<array>
+#include<algorithm>
+#include<stack>
+#include "GlobalHead.h"
 using namespace std;
 
-int main(void)
+using namespace std;
+typedef int ElemType;
+
+
+
+
+map<char, int> mymap;
+
+
+
+void process_map(string & stu){
+    for(int i=0; i< stu.size(); i++){
+        if( mymap.find(stu[i]) == mymap.end() ){
+            mymap[stu[i]] = 1;
+        }else{
+            mymap[stu[i]]++;
+        }
+    }
+
+    for( auto it = mymap.begin(); it != mymap.end(); it++ )
+        cout << it->first << ": " << it-> second << endl;
+}
+
+void dfs( string& res, string& in, vector<string>& outcome){
+    if(res.size() == in.size())
+        outcome.push_back(res);
+
+    for( int i = 0; i < data.size(); i++ ){
+
+    }
+
+    for( auto it = mymap.begin(); it != mymap.end(); it++ ){
+        if( it -> second > 0 ){
+            res += it->first;
+            it -> second--;
+
+
+        }
+    }
+
+}
+
+string combine(string& in, int count){
+    string res = "";
+
+    int size = 0;
+    while( size < in.size() ){
+        int part = 0;
+        for( auto it = mymap.begin(); it != mymap.end(); it++ ){
+            if( it -> second > 0 ){
+                res += it->first;
+                it -> second--;
+                part++;
+                size++;
+                if(part == count + 1)
+                    break;
+
+            }
+
+        }
+        if( part != count + 1 ){
+            return "-1";
+        }
+    }
+    return res;
+
+}
+
+struct node{
+    char a;
+    int val;
+    node(char a, int val): a(a), val(val){}
+};
+// FUNCTION SIGNATURE BEGINS, THIS FUNCTION IS REQUIRED
+string rearrange(string students, int count)
 {
-    multimap<int,char*> m;
-
-
-    typedef pair<int,char* > PAIR;
-    //multimap的插入只能用insert()不能用数组
-    m.insert(PAIR(1,"apple"));
-    m.insert(pair<int,char*>(1,"pear"));//apple和pear的价钱完全有可能是一样的
-    m.insert(pair<int,char*>(2,"banana"));
-
-    //multimap的遍历只能用迭代器方式不能用数组
-    cout<<"***************************************"<<endl;
-    multimap<int,char*>::iterator i,iend = m.end();
-    for(i=m.begin();i!=iend;i++)
-    {
-        cout<<(*i).second<<"的价钱是"
-            <<(*i).first<<"元/斤\n";
+    // WRITE YOUR CODE HERE
+    process_map(students);
+    vector<node> data;
+    for( auto it = mymap.begin(); it != mymap.end(); it++ ){
+        node tmp(it-> first, it-> second);
+        data.push_back(tmp);
     }
 
-    cout<<"***************************************"<<endl;
-    //元素的反向遍历
-    multimap<int,char*>::reverse_iterator j,jend;
-    jend=m.rend();
-    for(j=m.rbegin();j!=jend;j++)
-    {
-        cout<<(*j).second<<"的价钱是"
-            <<(*j).first<<"元/斤\n";
-    }
+    cout << combine(students, count);
 
-    cout<<"***************************************"<<endl;
-    //元素的搜索find(),pair<iterator,iterator>equal_range(const key_type &k)const
-    //和multiset的用法一样
-    multimap<int,char*>::iterator s;
-    s=m.find(1);//find()只要找到一个就行了，然后立即返回。
-    cout<<(*s).second<<"    "
-        <<(*s).first<<endl;
-    cout<<"键值等于1的元素个数是："<<m.count(1)<<endl;
-    cout<<"***************************************"<<endl;
-    //删除 erase(),clear()
-    m.erase(1);
-    for(i=m.begin();i!=iend;i++)
-    {
-        cout<<(*i).second<<"的价钱是"
-            <<(*i).first<<"元/斤\n";
-    }
-    return 0;
+    return "";
+}
+// FUNCTION SIGNATURE ENDS
+
+
+//主函数
+int main()
+{
+    string in = "aaaabbbcc";
+    int count = 1;
+    cout << rearrange(in, 1);
+
+
+
+    return  0;
 }
