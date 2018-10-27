@@ -1,1 +1,1 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/leetcode_tmp.dir/main.cpp.o  -o leetcode_tmp 
+/Library/Developer/CommandLineTools/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/leetcode_tmp.dir/main.cpp.o CMakeFiles/leetcode_tmp.dir/GeneralPrint.cpp.o  -o leetcode_tmp 

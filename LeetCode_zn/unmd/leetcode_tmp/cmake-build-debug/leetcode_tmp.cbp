@@ -82,6 +82,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GeneralPrint.cpp">
+			<Option target="leetcode_tmp"/>
+		</Unit>
+		<Unit filename="/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GeneralPrint.h">
+			<Option target="leetcode_tmp"/>
+		</Unit>
+		<Unit filename="/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GlobalFunc.h">
+			<Option target="leetcode_tmp"/>
+		</Unit>
+		<Unit filename="/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GlobalHead.h">
+			<Option target="leetcode_tmp"/>
+		</Unit>
 		<Unit filename="/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/main.cpp">
 			<Option target="leetcode_tmp"/>
 		</Unit>

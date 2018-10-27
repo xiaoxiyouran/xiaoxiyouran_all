@@ -3,4 +3,4 @@ project(leetcode_tmp)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(leetcode_tmp main.cpp)
+add_executable(leetcode_tmp main.cpp GeneralPrint.h GeneralPrint.cpp GlobalFunc.h GlobalHead.h)

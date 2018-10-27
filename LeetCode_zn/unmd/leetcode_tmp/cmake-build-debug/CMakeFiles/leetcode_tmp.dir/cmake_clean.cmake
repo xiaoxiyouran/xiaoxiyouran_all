@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/leetcode_tmp.dir/main.cpp.o"
+  "CMakeFiles/leetcode_tmp.dir/GeneralPrint.cpp.o"
   "leetcode_tmp.pdb"
   "leetcode_tmp"
 )

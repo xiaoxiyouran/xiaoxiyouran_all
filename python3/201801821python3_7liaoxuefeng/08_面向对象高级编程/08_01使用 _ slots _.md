@@ -1,0 +1,129 @@
+# 使用 _ slots _
+
+## 给实例对象绑定属性和方法
+
+正常情况下，当我们定义了一个class，创建了一个class的实例后，我们可以给该实例绑定任何属性和方法，这就是动态语言的灵活性。先定义class：
+
+```python
+class Student(object):
+    pass
+```
+
+然后，尝试给实例绑定一个属性：
+
+```python
+>>> s = Student()
+>>> s.name = 'Michael' # 动态给实例绑定一个属性
+>>> print(s.name)
+Michael
+```
+
+还可以尝试给实例绑定一个方法：
+
+```python
+>>> def set_age(self, age): # 定义一个函数作为实例方法
+...     self.age = age
+...
+>>> from types import MethodType
+>>> s.set_age = MethodType(set_age, s) # 给实例绑定一个方法
+>>> s.set_age(25) # 调用实例方法
+>>> s.age # 测试结果
+25
+```
+
+但是，给一个实例绑定的方法，对另一个实例是不起作用的：
+
+```python
+>>> s2 = Student() # 创建新的实例
+>>> s2.set_age(25) # 尝试调用方法
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Student' object has no attribute 'set_age'
+```
+
+<br>
+
+## 给类绑定方法
+
+为了给所有实例都绑定方法，可以给class绑定方法：
+
+```python
+>>> def set_score(self, score):
+...     self.score = score
+...
+>>> Student.set_score = set_score
+```
+
+给class绑定方法后，所有实例均可调用：
+
+```python
+>>> s.set_score(100)
+>>> s.score
+100
+>>> s2.set_score(99)
+>>> s2.score
+99
+```
+
+通常情况下，上面的`set_score`方法可以直接定义在class中，但动态绑定允许我们在程序运行的过程中动态给class加上功能，这在静态语言中很难实现。
+
+<br>
+
+### 使用__slots__
+
+但是，如果我们想要**==限制实例的属性==**怎么办？比如，==**只允许对Student实例添加`name`和`age`属性**==。
+
+为了达到限制的目的，Python允许在定义class的时候，定义一个==特殊的`__slots__`变量，来限制该class实例能添加的属性==：
+
+```python
+class Student(object):
+    __slots__ = ('name', 'age') # 用tuple定义允许绑定的属性名称
+```
+
+然后，我们试试：
+
+```python
+>>> s = Student() # 创建新的实例
+>>> s.name = 'Michael' # 绑定属性'name'
+>>> s.age = 25 # 绑定属性'age'
+>>> s.score = 99 # 绑定属性'score'
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Student' object has no attribute 'score'
+```
+
+由于`'score'`没有被放到`__slots__`中，所以不能绑定`score`属性，试图绑定`score`将得到`AttributeError`的错误。
+
+使用`__slots__`要注意，`__slots__`定义的属性==仅对当前类实例起作用==，对继承的子类是不起作用的：
+
+```python
+>>> class GraduateStudent(Student):
+...     pass
+...
+>>> g = GraduateStudent()
+>>> g.score = 9999
+```
+
+除非在==子类中也定义`__slots__`，这样，子类实例允许定义的属性就是自身的`__slots__`加上父类的`__slots__`。==
+
+1、当子类定义中没有slots时，父类的slots对子类不起作用。子类实例想加什么属性就加什么属性
+2、当子类定义中有slots时，父类的slots会对子类起作用。子类会继承父类的slot，那么子类实例能加的属性就是父类slots和子类本身slots规定的属性了。
+
+实测，如果==子类中有slots 那么 父类中定义的属性，在子类中也是可以使用的，也就是继承作用==；
+如果子类中没有slots 那么 父类中定义的属性，子类中是不可以使用的，就是不起作用
+
+举例， 当子类也定义 `__slots__` 时， 父类的 `__slots__` 会发生作用：
+
+```python
+class Peo(object):
+    __slots__ = ('name', 'age')
+class Chinese(Peo):
+    __slots__ = ('area')
+peo1 = Chinese()
+peo1.area = 'BJ'
+peo1.name = '码匠'
+peo1.age = 4
+```
+
+
+

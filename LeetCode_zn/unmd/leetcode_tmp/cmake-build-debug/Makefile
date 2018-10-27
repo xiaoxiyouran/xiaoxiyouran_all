@@ -123,6 +123,33 @@ leetcode_tmp/fast:
 	$(MAKE) -f CMakeFiles/leetcode_tmp.dir/build.make CMakeFiles/leetcode_tmp.dir/build
 .PHONY : leetcode_tmp/fast
 
+GeneralPrint.o: GeneralPrint.cpp.o
+
+.PHONY : GeneralPrint.o
+
+# target to build an object file
+GeneralPrint.cpp.o:
+	$(MAKE) -f CMakeFiles/leetcode_tmp.dir/build.make CMakeFiles/leetcode_tmp.dir/GeneralPrint.cpp.o
+.PHONY : GeneralPrint.cpp.o
+
+GeneralPrint.i: GeneralPrint.cpp.i
+
+.PHONY : GeneralPrint.i
+
+# target to preprocess a source file
+GeneralPrint.cpp.i:
+	$(MAKE) -f CMakeFiles/leetcode_tmp.dir/build.make CMakeFiles/leetcode_tmp.dir/GeneralPrint.cpp.i
+.PHONY : GeneralPrint.cpp.i
+
+GeneralPrint.s: GeneralPrint.cpp.s
+
+.PHONY : GeneralPrint.s
+
+# target to generate assembly for a file
+GeneralPrint.cpp.s:
+	$(MAKE) -f CMakeFiles/leetcode_tmp.dir/build.make CMakeFiles/leetcode_tmp.dir/GeneralPrint.cpp.s
+.PHONY : GeneralPrint.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... leetcode_tmp"
+	@echo "... GeneralPrint.o"
+	@echo "... GeneralPrint.i"
+	@echo "... GeneralPrint.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
