@@ -1,24 +1,19 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
-func main() {
-	pow := make([]int, 10)			// 长度为 10
-	for i := range pow {			// value 直接省略即可
-		pow[i] = 1 << uint(i)
+
+func WordCount(s string) map[string]int {
+	m := make(map[string]int)// map对象
+	c := strings.Fields(s)// []string
+	for _, v := range c {
+		m[v] += 1 // 如果v没有在map中，m[v]的值为初始值 0
 	}
-	for _, value := range pow {		// 如果省略index， 需要用 _ 代替
-		fmt.Printf("%d\n", value)
-	}
+	return m
 }
-
-//1
-//2
-//4
-//8
-//16
-//32
-//64
-//128
-//256
-//512
+func main() {
+	wc.Test(WordCount)
+}

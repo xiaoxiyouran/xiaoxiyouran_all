@@ -460,7 +460,169 @@ func main() {
 //512
 ```
 
+<br>
 
+## map
+
+map 映射键到值。
+
+map 在==使用之前必须用 `make`== 而不是 `new` 来创建；==值为 `nil` 的 map 是空的，并且不能赋值==。
+
+```go
+package main
+
+import "fmt"
+
+type Vertex struct {
+	Lat, Long float64
+}
+
+var m map[string]Vertex
+
+func main() {
+	m = make(map[string]Vertex)
+	m["Bell Labs"] = Vertex{
+		40.68433, -74.39967,
+	}
+	fmt.Println(m["Bell Labs"])
+}
+
+//{40.68433 -74.39967}
+```
+
+<br>
+
+### map 的文法
+
+map 的文法跟结构体文法相似，不过必须有键名。
+
+```go
+package main
+
+import "fmt"
+
+type Vertex struct {
+	Lat, Long float64
+}
+
+var m = map[string]Vertex{		// 使用键值对， 声明定义时初始化
+	"Bell Labs": Vertex{
+		40.68433, -74.39967,
+	},
+	"Google": Vertex{
+		37.42202, -122.08408,
+	},
+}
+
+func main() {
+	fmt.Println(m)
+}
+
+//map[Bell Labs:{40.68433 -74.39967} Google:{37.42202 -122.08408}]
+
+```
+
+如果顶级的类型**只有类型名的话**，可以**在文法的元素中省略键名。**
+
+```go
+package main
+
+import "fmt"
+
+type Vertex struct {
+	Lat, Long float64
+}
+
+var m = map[string]Vertex{
+	"Bell Labs": {40.68433, -74.39967},		//  这里省略了 Vertex 键名
+	"Google":    {37.42202, -122.08408},
+}
+
+func main() {
+	fmt.Println(m)
+}
+
+//map[Bell Labs:{40.68433 -74.39967} Google:{37.42202 -122.08408}]
+```
+
+<br>
+
+### 修改map
+
+在 map `m` 中**插入或修改一个元素**：
+
+```go
+m[key] = elem
+```
+
+获得元素：
+
+```go
+elem = m[key]
+```
+
+==删除元素==：
+
+```go
+delete(m, key)
+```
+
+通过==双赋值检测某个键存在==：
+
+```go
+elem, ok = m[key]
+```
+
+如果 `key` 在 `m` 中，`ok` 为 `true` 。否则， `ok` 为 `false`，并且 ==`elem` 是 map 的元素类型的零值==。
+
+同样的，当从 map 中:
+
+- ==读取某个不存在的键时，结果是 map 的元素类型的零值。==
+- 如果存在， 返回的就是该键对应的值；
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	m := make(map[string]int)
+
+	m["Answer"] = 42
+	fmt.Println("The value:", m["Answer"])
+
+	m["Answer"] = 48
+	fmt.Println("The value:", m["Answer"])
+
+	delete(m, "Answer")
+	fmt.Println("The value:", m["Answer"])		// 删除键后， 值就是0
+
+	v, ok := m["Answer"]
+	fmt.Println("The value:", v, "Present?", ok)
+
+
+	fmt.Println("-------------------------------")
+	m["good"] = 1
+	v2, ok2 := m["good"]
+	fmt.Println("The value:", v2, "Present?", ok2)		// 能取到， element 就是该键对应的值
+}
+
+
+//The value: 42
+//The value: 48
+//The value: 0
+//The value: 0 Present? false
+//-------------------------------
+//The value: 1 Present? true
+```
+
+<br>
+
+## 练习：map
+
+实现 `WordCount`。它应当返回一个含有 `s` 中每个 “词” 个数的 map。函数 `wc.Test` 针对这个函数执行一个测试用例，并输出成功还是失败。
+
+你会发现 [strings.Fields](http://golang.org/pkg/strings/#Fields) 很有帮助。
 
 
 
