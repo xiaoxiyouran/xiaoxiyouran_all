@@ -142,6 +142,8 @@
 
 ## System Implementation - Fast Search
 
+未完： https://www.coursera.org/learn/text-retrieval
+
 
 
 
@@ -149,6 +151,8 @@
 <br>
 
 ## 参考
+
+0- [利用悟空搜索引擎- 原理及使用](http://blog.jobbole.com/110293/) 
 
 1- https://blog.csdn.net/shijing_0214/article/details/50909082
 
@@ -158,7 +162,19 @@
 
 4- [Github - simple-search](https://github.com/rahulmutt/simple-search) 
 
-5- [**Github- giopen-source-search-engine**](https://github.com/gigablast/open-source-search-engine)  这个强大倒是蛮强大的，但是没有跑起来啊， 可以试一下在linux下的运行；
+5- [gigablast - **Github- giopen-source-search-engine**](https://github.com/gigablast/open-source-search-engine)  这个强大倒是蛮强大的，但是没有跑起来啊， 可以试一下在linux下的运行；
+
+6- [用Python实现一个大数据搜索引擎](https://my.oschina.net/taogang/blog/1579204) 
+
+7- [做一个简单的搜索引擎，需要哪些知识和技术](https://www.zhihu.com/question/29271575) 
+
+在这里提到了， 自定义搜索引擎，可以用[whoosh](https://whoosh.readthedocs.io/en/latest/quickstart.html) 
+
+8- [怎样实现一个搜索引擎](https://my.oschina.net/felingdev/blog/393170) 
+
+
+
+
 
 
 

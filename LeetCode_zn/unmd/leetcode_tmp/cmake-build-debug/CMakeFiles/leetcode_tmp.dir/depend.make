@@ -4,8 +4,5 @@
 CMakeFiles/leetcode_tmp.dir/GeneralPrint.cpp.o: ../GeneralPrint.cpp
 CMakeFiles/leetcode_tmp.dir/GeneralPrint.cpp.o: ../GeneralPrint.h
 
-CMakeFiles/leetcode_tmp.dir/main.cpp.o: ../GeneralPrint.h
-CMakeFiles/leetcode_tmp.dir/main.cpp.o: ../GlobalFunc.h
-CMakeFiles/leetcode_tmp.dir/main.cpp.o: ../GlobalHead.h
 CMakeFiles/leetcode_tmp.dir/main.cpp.o: ../main.cpp
 

@@ -1,117 +1,43 @@
-#include<stdio.h>
-#include<string.h>
-#include<iostream>
-#include<functional>
-#include<queue>
-#include<set>
-#include<string>
-#include<unordered_map>
-#include<map>
-#include<array>
-#include<algorithm>
-#include<stack>
-#include "GlobalHead.h"
+#include <iostream>
+#include <vector>
+#include <string>
 using namespace std;
 
-using namespace std;
-typedef int ElemType;
 
+bool isMatch(const char *s, const char *p) {
+    const char* star=NULL;
+    const char* ss=s;
+    while (*s){
+        //advancing both pointers when (both characters match) or ('?' found in pattern)
+        //note that *p will not advance beyond its length
+        if ((*p=='?')||(*p==*s)){s++;p++;continue;}
 
+        // * found in pattern, track index of *, only advancing pattern pointer
+        if (*p=='*'){star=p++; ss=s;continue;}
 
+        //current characters didn't match, last pattern pointer was *, current pattern pointer is not *
+        //only advancing pattern pointer
+        if (star){ p = star+1; s=++ss;continue;}
 
-map<char, int> mymap;
-
-
-
-void process_map(string & stu){
-    for(int i=0; i< stu.size(); i++){
-        if( mymap.find(stu[i]) == mymap.end() ){
-            mymap[stu[i]] = 1;
-        }else{
-            mymap[stu[i]]++;
-        }
+        //current pattern pointer is not star, last patter pointer was not *
+        //characters do not match
+        return false;
     }
 
-    for( auto it = mymap.begin(); it != mymap.end(); it++ )
-        cout << it->first << ": " << it-> second << endl;
+    //check for remaining characters in pattern
+    while (*p=='*'){p++;}
+
+    return !*p;
 }
 
-void dfs( string& res, string& in, vector<string>& outcome){
-    if(res.size() == in.size())
-        outcome.push_back(res);
-
-    for( int i = 0; i < data.size(); i++ ){
-
-    }
-
-    for( auto it = mymap.begin(); it != mymap.end(); it++ ){
-        if( it -> second > 0 ){
-            res += it->first;
-            it -> second--;
 
 
-        }
-    }
+int main() {
 
-}
-
-string combine(string& in, int count){
-    string res = "";
-
-    int size = 0;
-    while( size < in.size() ){
-        int part = 0;
-        for( auto it = mymap.begin(); it != mymap.end(); it++ ){
-            if( it -> second > 0 ){
-                res += it->first;
-                it -> second--;
-                part++;
-                size++;
-                if(part == count + 1)
-                    break;
-
-            }
-
-        }
-        if( part != count + 1 ){
-            return "-1";
-        }
-    }
-    return res;
-
-}
-
-struct node{
-    char a;
-    int val;
-    node(char a, int val): a(a), val(val){}
-};
-// FUNCTION SIGNATURE BEGINS, THIS FUNCTION IS REQUIRED
-string rearrange(string students, int count)
-{
-    // WRITE YOUR CODE HERE
-    process_map(students);
-    vector<node> data;
-    for( auto it = mymap.begin(); it != mymap.end(); it++ ){
-        node tmp(it-> first, it-> second);
-        data.push_back(tmp);
-    }
-
-    cout << combine(students, count);
-
-    return "";
-}
-// FUNCTION SIGNATURE ENDS
-
-
-//主函数
-int main()
-{
-    string in = "aaaabbbcc";
-    int count = 1;
-    cout << rearrange(in, 1);
+    char* s = "adceb", *p = "*a*b";
+    cout << isMatch(s, p);
 
 
 
-    return  0;
+    return 0;
 }
