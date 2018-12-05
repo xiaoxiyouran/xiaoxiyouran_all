@@ -1,0 +1,5 @@
+document.write("<div id='span_myads'><script type='text/javascript'> var cpro_id = 'u3102950';</script><script type='text/javascript' src='http://cpro.baidustatic.com/cpro/ui/c.js'></script></div>"); 
+document.write("<script type='text/javascript'>");
+document.write("document.getElementById('myaas').innerHTML = document.getElementById('span_myads').innerHTML; document.getElementById('span_myads').innerHTML = ''; </script> ");
+document.write("<div id='span_myaas1'><script type='text/javascript'> var cpro_id = 'u3102953';</script><script type='text/javascript' src='http://cpro.baidustatic.com/cpro/ui/c.js'></script></div>");
+document.write("<script type='text/javascript'> document.getElementById('myaas1').innerHTML = document.getElementById('span_myaas1').innerHTML; document.getElementById('span_myaas1').innerHTML = ''; </script> "); 

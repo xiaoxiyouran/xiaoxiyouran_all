@@ -1,0 +1,2 @@
+E:\20170908MinGW\bin\ar.exe qc liblibDijstra.a  CMakeFiles/libDijstra.dir/lib/Dijkstra.c.obj
+E:\20170908MinGW\bin\ranlib.exe liblibDijstra.a

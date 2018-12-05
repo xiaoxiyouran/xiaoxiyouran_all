@@ -1,0 +1,34 @@
+RM=rm -f $(1)
+rpu_thu_func_name := __gr_task_gemm
+
+all: $(rpu_thu_func_name).arm	
+
+$(rpu_thu_func_name).arm : rpu_thu.hex 
+	perl asc2h.pl $< $@
+
+rpu_thu.hex: rpu_thu.axf
+	fromelf --vhx --32x1 $< -o $@
+
+rpu_thu.axf: ../../Drivers/rpu_thu/libRpuThu.a init.o vectors.o retarget.o ../$(rpu_thu_func_name).o ../task_main.o
+	armlink --info totals --info unused --entry 0x0 --scatter ./boot/scatter.scat --datacompressor=off --map --list $@.map -o $@ $^ 
+
+init.o :boot/init.s
+	armasm -g --cpu=4T $< 
+
+vectors.o :boot/vectors.s
+	armasm -g --cpu=4T $< 
+
+retarget.o :boot/retarget.c 
+	armcc -c $<
+clean:
+	$(call RM,*.o)
+	$(call RM,*.txt)
+	$(call RM,*.log)
+	$(call RM,*.map)
+	$(call RM,*.hex)
+
+cleanall: clean
+	$(call RM,*.axf)
+	$(call RM,*.arm)
+
+rebuild: cleanall all

@@ -1,0 +1,219 @@
+//#include "thlib.h"
+#include "../Drivers/rpu_thu/rpu_thu_drv.h"
+#include "../Drivers/rpu_thu/gr_thu.h"
+#include "../Drivers/rpu_thu/rpu_thu_pea_drv.h"
+
+#define th_printf rpu_thu_printf
+
+/* Define iterations */
+#if !defined(ITERATIONS) || CRC_CHECK || ITERATIONS==DEFAULT
+#undef ITERATIONS
+#if CRC_CHECK
+#define ITERATIONS 200	/* required iterations for crc */
+#else
+#define ITERATIONS 1	/* recommended iterations for benchmark */
+#endif
+#endif
+
+/*------------------------------------------------------------------------------
+ * FUNC   : al_signal_start
+ *
+ * DESC   : Adaptation layer implimentation of th_signal_start()
+ *
+ *          This function is called when the benchmark starts.  It should
+ *          start the target timer or record the current value of a free
+ *          running timer.
+ *
+ * PORTING: If you want to support target based timing, you need to
+ *          fill in this function.
+ * ---------------------------------------------------------------------------*/
+
+void al_signal_start( void )
+{
+        /* Board specific timer code */                      
+        initTimer();      
+}
+
+
+/*------------------------------------------------------------------------------
+ * FUNC   : al_signal_finished
+ *
+ * DESC   : Adaptation layer implimentation of th_signal_finished()
+ *
+ *          This function is called when a benchmark or test finishes.  It
+ *          stops the target timer or reads the value of a free running
+ *          timer and calculates the number of timer ticks since
+ *          al_signal_start() was called.
+ *
+ * RETURNS: The number of ticks since al_signal_start() was called.
+ *
+ * PORTING: If you want to support target based timing, you need to
+ *          fill in this function.
+ * ---------------------------------------------------------------------------*/
+
+static long int al_duration_cycle;
+
+long int al_signal_finished( void )
+{
+	/* Board specific timer code  */ 
+        al_duration_cycle = readTimer();
+	stopTimer();
+	return al_duration_cycle;
+}
+
+
+
+
+/*****************************************************
+******************************************************
+******************************************************
+*****************算法映射****************************
+******************************************************
+******************************************************
+******************************************************/
+
+void __gr_task_gemm(int *matA, int *matB,int *matC, int *temp, unsigned int* config_pack_g1,unsigned int config_pack_line1,unsigned int* config_pack_g2,unsigned int config_pack_line2);
+
+int rpu_thu_run_fir_filter(rpu_thu_cmd_para_type *rpu_seu_cmd_para)
+{
+    int i;	
+    int *matA,*matB,*matC, *temp;
+    unsigned int* config_pack_gemm1,* config_pack_gemm2;
+    unsigned int config_pack_gemm_line1, config_pack_gemm_line2;
+    //printf("rpu_thu_run_gemm start\n");
+/*
+    //pea
+    int pea_config_idx = rpu_thu_seek_pea_config(rpu_seu_cmd_para->pea_config_packet_base,RPU_PEA_CONFIG_ID_FIR_FILTER);
+    if (pea_config_idx < 0)
+    {
+        return -1;
+    }
+
+    config_pack_fir = rpu_seu_cmd_para->pea_config_packet_base[pea_config_idx].addr;
+    config_pack_fir_line = rpu_seu_cmd_para->pea_config_packet_base[pea_config_idx].length>>3;
+*/
+    //paramter
+   // printf("imax=%d\n", rpu_seu_cmd_para->kernel_para_num);
+    for (i=0;i<rpu_seu_cmd_para->kernel_para_num;i++)
+    {
+       //th_printf("i=%d id=%d data=%x\n", i, rpu_seu_cmd_para->kernel_para[i].id, rpu_seu_cmd_para->kernel_para[i].addr);
+        if (rpu_seu_cmd_para->kernel_para[i].id == 0)
+        {
+            matA = (int *)rpu_seu_cmd_para->kernel_para[i].addr;
+        }
+        else if (rpu_seu_cmd_para->kernel_para[i].id == 1)
+        {
+            matB = (int *)rpu_seu_cmd_para->kernel_para[i].addr;
+	}
+	else if (rpu_seu_cmd_para->kernel_para[i].id == 2)
+        {
+            matC = (int *)rpu_seu_cmd_para->kernel_para[i].addr;
+	}
+	else if (rpu_seu_cmd_para->kernel_para[i].id == 3)
+        {
+            temp = (int *)rpu_seu_cmd_para->kernel_para[i].addr;
+	}
+	else if (rpu_seu_cmd_para->kernel_para[i].id == 4)
+        {
+            config_pack_gemm1 = (int *)rpu_seu_cmd_para->kernel_para[i].addr;
+	}
+	else if (rpu_seu_cmd_para->kernel_para[i].id == 5)
+        {
+            config_pack_gemm_line1 = (int *)rpu_seu_cmd_para->kernel_para[i].addr;
+	}
+	else if (rpu_seu_cmd_para->kernel_para[i].id == 6)
+        {
+            config_pack_gemm2 = (int *)rpu_seu_cmd_para->kernel_para[i].addr;
+	}
+	else if (rpu_seu_cmd_para->kernel_para[i].id == 7)
+        {
+            config_pack_gemm_line2 = (int *)rpu_seu_cmd_para->kernel_para[i].addr;
+	}
+        else
+        {
+#if !defined( NDEBUG )
+            printf("rpu_thu_run : no supported kernel_para_id .\n");
+#endif
+        }
+    }
+#if !defined( NDEBUG )
+     //printf("matA.addr = %x\n",matA);
+#endif
+    //run
+    al_signal_start();
+    for ( i = 0; i < ITERATIONS; i++ )  /* no stopping! */
+    {
+    __gr_task_gemm(InputData,  auctorData, Scale, x, lag,Input32, config_pack_auctor1, config_pack_auctor_line1,config_pack_auctor2, config_pack_auctor_line2);
+    }
+    *(volatile unsigned long int *)(0x17000000)=al_signal_finished(); 
+
+    return 0;
+}
+
+
+int rpu_thu_run(rpu_thu_cmd_para_type *rpu_seu_cmd_para)
+{
+
+    if (rpu_seu_cmd_para->kernel_id == 0)
+    {
+        rpu_thu_run_fir_filter(rpu_seu_cmd_para);
+    }
+    else
+    {
+    #if !defined( NDEBUG )
+        th_printf("rpu_thu_run : no supported kernel_id .\n");
+    #endif
+    }
+
+    return 0;
+}
+
+int main( )
+{
+
+    //Added by Houziijian 2016.5.20 
+    /********************************************************/
+    rpu_thu_ddr_init();
+
+
+    rpu_thu_uart_init();
+/********************************************************/
+
+
+    rpu_thu_cmd_para_type  *rpu_seu_cmd_para; 
+
+#if !defined( NDEBUG )
+    th_printf("rpu_thu app boot ok.\n");
+#endif
+
+    while (1)
+    {
+        volatile int rpu_seu_cmd = pop_rpu_cmd_fifo();
+        switch (rpu_seu_cmd)
+        {
+        case RPU_THU_CMD_BOOT:
+            rpu_thu_boot();
+            break;
+        case RPU_THU_CMD_REBOOT:
+            rpu_thu_reboot();
+            break;
+        case RPU_THU_CMD_RUN:
+            rpu_seu_cmd_para = (rpu_thu_cmd_para_type *)pop_rpu_cmd_fifo();
+            rpu_thu_run(rpu_seu_cmd_para);
+#if !defined( NDEBUG )
+            th_printf("rpu_thu app run ok.\n");
+#endif
+            break;
+        case RPU_THU_CMD_SYNC:
+            rpu_thu_sync();
+#if !defined( NDEBUG )
+            th_printf("rpu_thu app sync ok.\n");
+#endif
+            break;
+        default:
+            delay_us(10);
+            break;
+        }
+    }
+    return 0;
+}

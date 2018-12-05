@@ -1,0 +1,1177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml" xml:lang=
+"en-US">
+<head>
+<title>Supported Encodings</title>
+<!--
+<style type="text/css">
+  tr.jdk8_encoding {
+    background-color:yellow;    
+  }
+</style>
+-->
+<link rel="stylesheet" type="text/css" href="../../../technotes/css/guide.css" />
+</head>
+<body>
+<!-- STATIC HEADER -->
+
+<!-- header start -->
+<div id="javaseheader">
+<div id="javaseheaderlogo">
+<img src="../../../images/javalogo.gif"
+alt="Java logo" />
+</div>
+<div id="javaseheaderindex">
+
+<a href=
+"../../../index.html">Documentation Contents</a>
+</div>
+<div class="clear"></div>
+</div>
+
+<!-- header end -->
+
+
+<h1>Supported Encodings</h1>
+<p>The <code>java.io.InputStreamReader</code>,
+<code>java.io.OutputStreamWriter</code>,
+<code>java.lang.String</code> classes, and classes in the
+<code>java.nio.charset</code> package can convert between Unicode
+and a number of other character encodings. The supported encodings
+vary between different implementations of Java SE 8. The class description for
+<code><a href=
+"../../../api/java/nio/charset/Charset.html">java.nio.charset.Charset</a></code>
+lists the encodings that any implementation of Java SE 8 is required to support.</p>
+<p>JDK 8 for all platforms
+(Solaris, Linux, and Microsoft Windows) and JRE 8 for Solaris and Linux
+support all encodings shown on this page. JRE 8 for Microsoft Windows may be
+installed as a complete international version or as a European
+languages version. By default, the JRE 8 installer installs a
+European languages version if it recognizes that the host operating
+system only supports European languages. If the installer
+recognizes that any other language is needed, or if the user
+requests support for non-European languages in a customized
+installation, a complete international version is installed. The
+European languages version only supports the encodings shown in the
+following Basic Encoding Set table. The international version
+(which includes the <tt>lib/charsets.jar</tt> file) supports all
+encodings shown on this page.</p>
+<p>The following tables show the encoding sets supported by Java SE
+8. The canonical names used by the new <code>java.nio</code> APIs
+are in many cases not the same as those used in the
+<code>java.io</code> and <code>java.lang</code> APIs.</p>
+
+<h2>Basic Encoding Set (contained in lib/rt.jar)</h2>
+
+<table summary="Basic encoding set" border="1" cellpadding="2" cellspacing="0">
+ <tr>
+  <th id="h1">Canonical Name for java.nio API</th>
+  <th id="h2">Canonical Name for java.io API and java.lang API</th>
+  <th id="h3">Alias or Aliases</th>
+  <th id="h4">Description</th>
+ </tr>
+ <tr class="jdk8_encoding">
+  <td headers="h1">CESU-8</td>
+  <td headers="h2">CESU8</td>
+  <td headers="h3">CESU8 csCESU-8</td>
+  <td headers="h4">Unicode CESU-8</td>
+ </tr>
+ <tr>
+  <td headers="h1">IBM00858</td>
+  <td headers="h2">Cp858</td>
+  <td headers="h3">cp858 858 PC-Multilingual-850+euro cp00858 ccsid00858</td>
+  <td headers="h4">Variant of Cp850 with Euro character</td>
+ </tr>
+ <tr>
+  <td headers="h1">IBM437</td>
+  <td headers="h2">Cp437</td>
+  <td headers="h3">ibm437 437 ibm-437 cspc8codepage437 cp437 windows-437</td>
+  <td headers="h4">MS-DOS United States, Australia, New Zealand, South Africa</td>
+ </tr>
+ <tr>
+  <td headers="h1">IBM775</td>
+  <td headers="h2">Cp775</td>
+  <td headers="h3">ibm-775 ibm775 775 cp775</td>
+  <td headers="h4">PC Baltic</td>
+ </tr>
+ <tr>
+  <td headers="h1">IBM850</td>
+  <td headers="h2">Cp850</td>
+  <td headers="h3">cp850 cspc850multilingual ibm850 850 ibm-850</td>
+  <td headers="h4">MS-DOS Latin-1</td>
+ </tr>
+ <tr>
+  <td headers="h1">IBM852</td>
+  <td headers="h2">Cp852</td>
+  <td headers="h3">csPCp852 ibm-852 ibm852 852 cp852</td>
+  <td headers="h4">MS-DOS Latin-2</td>
+ </tr>
+ <tr>
+  <td headers="h1">IBM855</td>
+  <td headers="h2">Cp855</td>
+  <td headers="h3">ibm855 855 ibm-855 cp855 cspcp855</td>
+  <td headers="h4">IBM Cyrillic</td>
+ </tr>
+ <tr>
+  <td headers="h1">IBM857</td>
+  <td headers="h2">Cp857</td>
+  <td headers="h3">ibm857 857 cp857 csIBM857 ibm-857</td>
+  <td headers="h4">IBM Turkish</td>
+ </tr>
+ <tr>
+  <td headers="h1">IBM862</td>
+  <td headers="h2">Cp862</td>
+  <td headers="h3">csIBM862 cp862 ibm862 862 cspc862latinhebrew ibm-862</td>
+  <td headers="h4">PC Hebrew</td>
+ </tr>
+ <tr>
+  <td headers="h1">IBM866</td>
+  <td headers="h2">Cp866</td>
+  <td headers="h3">ibm866 866 ibm-866 csIBM866 cp866</td>
+  <td headers="h4">MS-DOS Russian</td>
+ </tr>
+ <tr>
+  <td headers="h1">ISO-8859-1</td>
+  <td headers="h2">ISO8859_1</td>
+  <td headers="h3">819 ISO8859-1 l1 ISO_8859-1:1987 ISO_8859-1 8859_1 iso-ir-100
+  latin1 cp819 ISO8859_1 IBM819 ISO_8859_1 IBM-819 csISOLatin1</td>
+  <td headers="h4">ISO-8859-1, Latin Alphabet No. 1</td>
+ </tr>
+ <tr>
+  <td headers="h1">ISO-8859-2</td>
+  <td headers="h2">ISO8859_2</td>
+  <td headers="h3">ISO8859-2 ibm912 l2 ISO_8859-2 8859_2 cp912 ISO_8859-2:1987
+  iso8859_2 iso-ir-101 latin2 912 csISOLatin2 ibm-912</td>
+  <td headers="h4">Latin Alphabet No. 2</td>
+ </tr>
+ <tr>
+  <td headers="h1">ISO-8859-4</td>
+  <td headers="h2">ISO8859_4</td>
+  <td headers="h3">8859_4 latin4 l4 cp914 ISO_8859-4:1988 ibm914 ISO_8859-4
+  iso-ir-110 iso8859_4 csISOLatin4 iso8859-4 914 ibm-914</td>
+  <td headers="h4">Latin Alphabet No. 4</td>
+ </tr>
+ <tr>
+  <td headers="h1">ISO-8859-5</td>
+  <td headers="h2">ISO8859_5</td>
+  <td headers="h3">ISO_8859-5:1988 csISOLatinCyrillic iso-ir-144 iso8859_5 cp915
+  8859_5 ibm-915 ISO_8859-5 ibm915 915 cyrillic ISO8859-5</td>
+  <td headers="h4">Latin/Cyrillic Alphabet</td>
+ </tr>
+ <tr>
+  <td headers="h1">ISO-8859-7</td>
+  <td headers="h2">ISO8859_7</td>
+  <td headers="h3">greek 8859_7 greek8 ibm813 ISO_8859-7 iso8859_7 ELOT_928 cp813
+  ISO_8859-7:1987 sun_eu_greek csISOLatinGreek iso-ir-126 813 iso8859-7
+  ECMA-118 ibm-813</td>
+  <td headers="h4">Latin/Greek Alphabet (ISO-8859-7:2003)</td>
+ </tr>
+ <tr>
+  <td headers="h1">ISO-8859-9</td>
+  <td headers="h2">ISO8859_9</td>
+  <td headers="h3">ibm-920 ISO_8859-9 8859_9 ISO_8859-9:1989 ibm920 latin5 l5
+  iso8859_9 cp920 920 iso-ir-148 ISO8859-9 csISOLatin5</td>
+  <td headers="h4">Latin Alphabet No. 5</td>
+ </tr>
+ <tr>
+  <td headers="h1">ISO-8859-13</td>
+  <td headers="h2">ISO8859_13</td>
+  <td headers="h3">iso_8859-13 ISO8859-13 iso8859_13 8859_13</td>
+  <td headers="h4">Latin Alphabet No. 7</td>
+ </tr>
+ <tr>
+  <td headers="h1">ISO-8859-15</td>
+  <td headers="h2">ISO8859_15</td>
+  <td headers="h3">ISO8859-15 LATIN0 ISO8859_15_FDIS ISO8859_15 cp923 8859_15 L9
+  ISO-8859-15 IBM923 csISOlatin9 ISO_8859-15 IBM-923 csISOlatin0 923
+  LATIN9</td>
+  <td headers="h4">Latin Alphabet No. 9</td>
+ </tr>
+ <tr>
+  <td headers="h1">KOI8-R</td>
+  <td headers="h2">KOI8_R</td>
+  <td headers="h3">koi8_r koi8 cskoi8r</td>
+  <td headers="h4">KOI8-R, Russian</td>
+ </tr>
+ <tr>
+  <td headers="h1">KOI8-U</td>
+  <td headers="h2">KOI8_U</td>
+  <td headers="h3">koi8_u</td>
+  <td headers="h4">KOI8-U, Ukrainian</td>
+ </tr>
+ <tr>
+  <td headers="h1">US-ASCII</td>
+  <td headers="h2">ASCII</td>
+  <td headers="h3">ANSI_X3.4-1968 cp367 csASCII iso-ir-6 ASCII iso_646.irv:1983
+  ANSI_X3.4-1986 ascii7 default ISO_646.irv:1991 ISO646-US IBM367 646 us</td>
+  <td headers="h4">American Standard Code for Information Interchange</td>
+ </tr>
+ <tr>
+  <td headers="h1">UTF-8</td>
+  <td headers="h2">UTF8</td>
+  <td headers="h3">unicode-1-1-utf-8 UTF8</td>
+  <td headers="h4">Eight-bit Unicode (or UCS) Transformation Format</td>
+ </tr>
+ <tr>
+  <td headers="h1">UTF-16</td>
+  <td headers="h2">UTF-16</td>
+  <td headers="h3">UTF_16 unicode utf16 UnicodeBig</td>
+  <td headers="h4">Sixteen-bit Unicode (or UCS) Transformation Format, byte order
+  identified by an optional byte-order mark</td>
+ </tr>
+ <tr>
+  <td headers="h1">UTF-16BE</td>
+  <td headers="h2">UnicodeBigUnmarked</td>
+  <td headers="h3">X-UTF-16BE UTF_16BE ISO-10646-UCS-2 UnicodeBigUnmarked</td>
+  <td headers="h4">Sixteen-bit Unicode (or UCS) Transformation Format, big-endian
+  byte order</td>
+ </tr>
+ <tr>
+  <td headers="h1">UTF-16LE</td>
+  <td headers="h2">UnicodeLittleUnmarked</td>
+  <td headers="h3">UnicodeLittleUnmarked UTF_16LE X-UTF-16LE</td>
+  <td headers="h4">Sixteen-bit Unicode (or UCS) Transformation Format,
+  little-endian byte order</td>
+ </tr>
+ <tr>
+  <td headers="h1">UTF-32</td>
+  <td headers="h2">UTF_32</td>
+  <td headers="h3">UTF_32 UTF32</td>
+  <td headers="h4">32-bit Unicode (or UCS) Transformation Format, byte order
+  identified by an optional byte-order mark</td>
+ </tr>
+ <tr>
+  <td headers="h1">UTF-32BE</td>
+  <td headers="h2">UTF_32BE</td>
+  <td headers="h3">X-UTF-32BE UTF_32BE</td>
+  <td headers="h4">32-bit Unicode (or UCS) Transformation Format, big-endian byte
+  order</td>
+ </tr>
+ <tr>
+  <td headers="h1">UTF-32LE</td>
+  <td headers="h2">UTF_32LE</td>
+  <td headers="h3">X-UTF-32LE UTF_32LE</td>
+  <td headers="h4">32-bit Unicode (or UCS) Transformation Format, little-endian
+  byte order</td>
+ </tr>
+ <tr>
+  <td headers="h1">x-UTF-32BE-BOM</td>
+  <td headers="h2">UTF_32BE_BOM</td>
+  <td headers="h3">UTF_32BE_BOM UTF-32BE-BOM</td>
+  <td headers="h4">32-bit Unicode (or UCS) Transformation Format, big-endian byte
+  order, with byte-order mark</td>
+ </tr>
+ <tr>
+  <td headers="h1">x-UTF-32LE-BOM</td>
+  <td headers="h2">UTF_32LE_BOM</td>
+  <td headers="h3">UTF_32LE_BOM UTF-32LE-BOM</td>
+  <td headers="h4">32-bit Unicode (or UCS) Transformation Format, little-endian
+  byte order, with byte-order mark</td>
+ </tr>
+ <tr>
+  <td headers="h1">windows-1250</td>
+  <td headers="h2">Cp1250</td>
+  <td headers="h3">cp1250 cp5346</td>
+  <td headers="h4">Windows Eastern European</td>
+ </tr>
+ <tr>
+  <td headers="h1">windows-1251</td>
+  <td headers="h2">Cp1251</td>
+  <td headers="h3">cp5347 ansi-1251 cp1251</td>
+  <td headers="h4">Windows Cyrillic</td>
+ </tr>
+ <tr>
+  <td headers="h1">windows-1252</td>
+  <td headers="h2">Cp1252</td>
+  <td headers="h3">cp5348 cp1252</td>
+  <td headers="h4">Windows Latin-1</td>
+ </tr>
+ <tr>
+  <td headers="h1">windows-1253</td>
+  <td headers="h2">Cp1253</td>
+  <td headers="h3">cp1253 cp5349</td>
+  <td headers="h4">Windows Greek</td>
+ </tr>
+ <tr>
+  <td headers="h1">windows-1254</td>
+  <td headers="h2">Cp1254</td>
+  <td headers="h3">cp1254 cp5350</td>
+  <td headers="h4">Windows Turkish</td>
+ </tr>
+ <tr>
+  <td headers="h1">windows-1257</td>
+  <td headers="h2">Cp1257</td>
+  <td headers="h3">cp1257 cp5353</td>
+  <td headers="h4">Windows Baltic</td>
+ </tr>
+ <tr>
+  <td headers="h1"><em>Not available</em></td>
+  <td headers="h2">UnicodeBig</td>
+  <td headers="h3"><em>Not available</em></td>
+  <td headers="h4">Sixteen-bit Unicode (or UCS) Transformation Format, big-endian
+  byte order, with byte-order mark</td>
+ </tr>
+ <tr>
+  <td headers="h1">x-IBM737</td>
+  <td headers="h2">Cp737</td>
+  <td headers="h3">cp737 ibm737 737 ibm-737</td>
+  <td headers="h4">PC Greek</td>
+ </tr>
+ <tr>
+  <td headers="h1">x-IBM874</td>
+  <td headers="h2">Cp874</td>
+  <td headers="h3">ibm-874 ibm874 874 cp874</td>
+  <td headers="h4">IBM Thai</td>
+ </tr>
+ <tr>
+  <td headers="h1">x-UTF-16LE-BOM</td>
+  <td headers="h2">UnicodeLittle</td>
+  <td headers="h3">UnicodeLittle</td>
+  <td headers="h4">Sixteen-bit Unicode (or UCS) Transformation Format,
+  little-endian byte order, with byte-order mark</td>
+ </tr>
+</table>
+
+<!-- *********************************************************************** -->
+<!-- *********************************************************************** -->
+<!-- *********************************************************************** -->
+
+<h2>Extended Encoding Set (contained in lib/charsets.jar)</h2>
+<table summary="Extended encoding set" border="1" cellpadding="2" cellspacing="0">
+ <tr>
+  <th id="h101">Canonical Name for java.nio API</th>
+  <th id="h102">Canonical Name for java.io API and java.lang API</th>
+  <th id="h103">Alias or Aliases</th>
+  <th id="h104">Description</th>
+ </tr>
+ <tr>
+  <td headers="h101">Big5</td>
+  <td headers="h102">Big5</td>
+  <td headers="h103">csBig5</td>
+  <td headers="h104">Big5, Traditional Chinese</td>
+ </tr>
+ <tr>
+  <td headers="h101">Big5-HKSCS</td>
+  <td headers="h102">Big5_HKSCS</td>
+  <td headers="h103">big5-hkscs big5hk Big5_HKSCS big5hkscs</td>
+  <td headers="h104">Big5 with Hong Kong extensions, Traditional Chinese
+  (incorporating 2001 revision)</td>
+ </tr>
+ <tr>
+  <td headers="h101">EUC-JP</td>
+  <td headers="h102">EUC_JP</td>
+  <td headers="h103">csEUCPkdFmtjapanese x-euc-jp eucjis
+  Extended_UNIX_Code_Packed_Format_for_Japanese euc_jp eucjp x-eucjp</td>
+  <td headers="h104">JISX 0201, 0208 and 0212, EUC encoding Japanese</td>
+ </tr>
+ <tr>
+  <td headers="h101">EUC-KR</td>
+  <td headers="h102">EUC_KR</td>
+  <td headers="h103">ksc5601-1987 csEUCKR ksc5601_1987 ksc5601 5601 euc_kr ksc_5601
+  ks_c_5601-1987 euckr</td>
+  <td headers="h104">KS C 5601, EUC encoding, Korean</td>
+ </tr>
+ <tr>
+  <td headers="h101">GB18030</td>
+  <td headers="h102">GB18030</td>
+  <td headers="h103">gb18030-2000</td>
+  <td headers="h104">Simplified Chinese, PRC standard</td>
+ </tr>
+ <tr>
+  <td headers="h101">GB2312</td>
+  <td headers="h102">EUC_CN</td>
+  <td headers="h103">gb2312 euc-cn x-EUC-CN euccn EUC_CN gb2312-80 gb2312-1980</td>
+  <td headers="h104">GB2312, EUC encoding, Simplified Chinese</td>
+ </tr>
+ <tr>
+  <td headers="h101">GBK</td>
+  <td headers="h102">GBK</td>
+  <td headers="h103">CP936 windows-936</td>
+  <td headers="h104">GBK, Simplified Chinese</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM-Thai</td>
+  <td headers="h102">Cp838</td>
+  <td headers="h103">ibm-838 ibm838 838 cp838</td>
+  <td headers="h104">IBM Thailand extended SBCS</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM01140</td>
+  <td headers="h102">Cp1140</td>
+  <td headers="h103">cp1140 1140 cp01140 ebcdic-us-037+euro ccsid01140</td>
+  <td headers="h104">Variant of Cp037 with Euro character</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM01141</td>
+  <td headers="h102">Cp1141</td>
+  <td headers="h103">1141 cp1141 cp01141 ccsid01141 ebcdic-de-273+euro</td>
+  <td headers="h104">Variant of Cp273 with Euro character</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM01142</td>
+  <td headers="h102">Cp1142</td>
+  <td headers="h103">1142 cp1142 cp01142 ccsid01142 ebcdic-no-277+euro
+  ebcdic-dk-277+euro</td>
+  <td headers="h104">Variant of Cp277 with Euro character</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM01143</td>
+  <td headers="h102">Cp1143</td>
+  <td headers="h103">1143 cp01143 ccsid01143 cp1143 ebcdic-fi-278+euro
+  ebcdic-se-278+euro</td>
+  <td headers="h104">Variant of Cp278 with Euro character</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM01144</td>
+  <td headers="h102">Cp1144</td>
+  <td headers="h103">cp01144 ccsid01144 ebcdic-it-280+euro cp1144 1144</td>
+  <td headers="h104">Variant of Cp280 with Euro character</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM01145</td>
+  <td headers="h102">Cp1145</td>
+  <td headers="h103">ccsid01145 ebcdic-es-284+euro 1145 cp1145 cp01145</td>
+  <td headers="h104">Variant of Cp284 with Euro character</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM01146</td>
+  <td headers="h102">Cp1146</td>
+  <td headers="h103">ebcdic-gb-285+euro 1146 cp1146 cp01146 ccsid01146</td>
+  <td headers="h104">Variant of Cp285 with Euro character</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM01147</td>
+  <td headers="h102">Cp1147</td>
+  <td headers="h103">cp1147 1147 cp01147 ccsid01147 ebcdic-fr-277+euro</td>
+  <td headers="h104">Variant of Cp297 with Euro character</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM01148</td>
+  <td headers="h102">Cp1148</td>
+  <td headers="h103">cp1148 ebcdic-international-500+euro 1148 cp01148
+  ccsid01148</td>
+  <td headers="h104">Variant of Cp500 with Euro character</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM01149</td>
+  <td headers="h102">Cp1149</td>
+  <td headers="h103">ebcdic-s-871+euro 1149 cp1149 cp01149 ccsid01149</td>
+  <td headers="h104">Variant of Cp871 with Euro character</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM037</td>
+  <td headers="h102">Cp037</td>
+  <td headers="h103">cp037 ibm037 ibm-037 csIBM037 ebcdic-cp-us ebcdic-cp-ca
+  ebcdic-cp-nl ebcdic-cp-wt 037 cpibm37 cs-ebcdic-cp-wt ibm-37 cs-ebcdic-cp-us
+  cs-ebcdic-cp-ca cs-ebcdic-cp-nl</td>
+  <td headers="h104">USA, Canada (Bilingual, French), Netherlands, Portugal, Brazil,
+  Australia</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM1026</td>
+  <td headers="h102">Cp1026</td>
+  <td headers="h103">cp1026 ibm-1026 1026 ibm1026</td>
+  <td headers="h104">IBM Latin-5, Turkey</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM1047</td>
+  <td headers="h102">Cp1047</td>
+  <td headers="h103">ibm-1047 1047 cp1047</td>
+  <td headers="h104">Latin-1 character set for EBCDIC hosts</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM273</td>
+  <td headers="h102">Cp273</td>
+  <td headers="h103">ibm-273 ibm273 273 cp273</td>
+  <td headers="h104">IBM Austria, Germany</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM277</td>
+  <td headers="h102">Cp277</td>
+  <td headers="h103">ibm277 277 cp277 ibm-277</td>
+  <td headers="h104">IBM Denmark, Norway</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM278</td>
+  <td headers="h102">Cp278</td>
+  <td headers="h103">cp278 278 ibm-278 ebcdic-cp-se csIBM278 ibm278 ebcdic-sv</td>
+  <td headers="h104">IBM Finland, Sweden</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM280</td>
+  <td headers="h102">Cp280</td>
+  <td headers="h103">ibm280 280 cp280 ibm-280</td>
+  <td headers="h104">IBM Italy</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM284</td>
+  <td headers="h102">Cp284</td>
+  <td headers="h103">csIBM284 ibm-284 cpibm284 ibm284 284 cp284</td>
+  <td headers="h104">IBM Catalan/Spain, Spanish Latin America</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM285</td>
+  <td headers="h102">Cp285</td>
+  <td headers="h103">csIBM285 cp285 ebcdic-gb ibm-285 cpibm285 ibm285 285 ebcdic-cp-gb</td>
+  <td headers="h104">IBM United Kingdom, Ireland</td>
+ </tr>
+ <tr class="jdk8_encoding">
+  <td headers="h101">IBM290</td>
+  <td headers="h102">Cp290</td>
+  <td headers="h103">ibm290 290 cp290 EBCDIC-JP-kana csIBM290 ibm-290</td>
+  <td headers="h104">IBM Japanese Katakana Host Extended SBCS</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM297</td>
+  <td headers="h102">Cp297</td>
+  <td headers="h103">297 csIBM297 cp297 ibm297 ibm-297 cpibm297 ebcdic-cp-fr</td>
+  <td headers="h104">IBM France</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM420</td>
+  <td headers="h102">Cp420</td>
+  <td headers="h103">ibm420 420 cp420 csIBM420 ibm-420 ebcdic-cp-ar1</td>
+  <td headers="h104">IBM Arabic</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM424</td>
+  <td headers="h102">Cp424</td>
+  <td headers="h103">ebcdic-cp-he csIBM424 ibm-424 ibm424 424 cp424</td>
+  <td headers="h104">IBM Hebrew</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM500</td>
+  <td headers="h102">Cp500</td>
+  <td headers="h103">ibm-500 ibm500 500 ebcdic-cp-bh ebcdic-cp-ch csIBM500 cp500</td>
+  <td headers="h104">EBCDIC 500V1</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM860</td>
+  <td headers="h102">Cp860</td>
+  <td headers="h103">ibm860 860 cp860 csIBM860 ibm-860</td>
+  <td headers="h104">MS-DOS Portuguese</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM861</td>
+  <td headers="h102">Cp861</td>
+  <td headers="h103">cp861 ibm861 861 ibm-861 cp-is csIBM861</td>
+  <td headers="h104">MS-DOS Icelandic</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM863</td>
+  <td headers="h102">Cp863</td>
+  <td headers="h103">csIBM863 ibm-863 ibm863 863 cp863</td>
+  <td headers="h104">MS-DOS Canadian French</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM864</td>
+  <td headers="h102">Cp864</td>
+  <td headers="h103">csIBM864 ibm-864 ibm864 864 cp864</td>
+  <td headers="h104">PC Arabic</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM865</td>
+  <td headers="h102">Cp865</td>
+  <td headers="h103">ibm-865 csIBM865 cp865 ibm865 865</td>
+  <td headers="h104">MS-DOS Nordic</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM868</td>
+  <td headers="h102">Cp868</td>
+  <td headers="h103">ibm868 868 cp868 csIBM868 ibm-868 cp-ar</td>
+  <td headers="h104">MS-DOS Pakistan</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM869</td>
+  <td headers="h102">Cp869</td>
+  <td headers="h103">cp869 ibm869 869 ibm-869 cp-gr csIBM869</td>
+  <td headers="h104">IBM Modern Greek</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM870</td>
+  <td headers="h102">Cp870</td>
+  <td headers="h103">870 cp870 csIBM870 ibm-870 ibm870 ebcdic-cp-roece ebcdic-cp-yu</td>
+  <td headers="h104">IBM Multilingual Latin-2</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM871</td>
+  <td headers="h102">Cp871</td>
+  <td headers="h103">ibm871 871 cp871 ebcdic-cp-is csIBM871 ibm-871</td>
+  <td headers="h104">IBM Iceland</td>
+ </tr>
+ <tr>
+  <td headers="h101">IBM918</td>
+  <td headers="h102">Cp918</td>
+  <td headers="h103">918 ibm-918 ebcdic-cp-ar2 cp918</td>
+  <td headers="h104">IBM Pakistan (Urdu)</td>
+ </tr>
+ <tr>
+  <td headers="h101">ISO-2022-CN</td>
+  <td headers="h102">ISO2022CN</td>
+  <td headers="h103">csISO2022CN ISO2022CN</td>
+  <td headers="h104">GB2312 and CNS11643 in ISO 2022 CN form, Simplified and
+  Traditional Chinese (conversion to Unicode only)</td>
+ </tr>
+ <tr>
+  <td headers="h101">ISO-2022-JP</td>
+  <td headers="h102">ISO2022JP</td>
+  <td headers="h103">csjisencoding iso2022jp jis_encoding jis csISO2022JP</td>
+  <td headers="h104">JIS X 0201, 0208, in ISO 2022 form, Japanese</td>
+ </tr>
+ <tr class="jdk8_encoding">
+  <td headers="h101">ISO-2022-JP-2</td>
+  <td headers="h102">ISO2022JP2</td>
+  <td headers="h103">csISO2022JP2 iso2022jp2</td>
+  <td headers="h104">JIS X 0201, 0208, 0212 in ISO 2022 form, Japanese</td>
+ </tr>
+ <tr>
+  <td headers="h101">ISO-2022-KR</td>
+  <td headers="h102">ISO2022KR</td>
+  <td headers="h103">csISO2022KR ISO2022KR</td>
+  <td headers="h104">ISO 2022 KR, Korean</td>
+ </tr>
+ <tr>
+  <td headers="h101">ISO-8859-3</td>
+  <td headers="h102">ISO8859_3</td>
+  <td headers="h103">ISO8859-3 ibm913 8859_3 l3 cp913 ISO_8859-3 iso8859_3 latin3
+  csISOLatin3 913 ISO_8859-3:1988 ibm-913 iso-ir-109</td>
+  <td headers="h104">Latin Alphabet No. 3</td>
+ </tr>
+ <tr>
+  <td headers="h101">ISO-8859-6</td>
+  <td headers="h102">ISO8859_6</td>
+  <td headers="h103">ASMO-708 8859_6 iso8859_6 ISO_8859-6 csISOLatinArabic ibm1089
+  arabic ibm-1089 1089 ECMA-114 iso-ir-127 ISO_8859-6:1987 ISO8859-6
+  cp1089</td>
+  <td headers="h104">Latin/Arabic Alphabet</td>
+ </tr>
+ <tr>
+  <td headers="h101">ISO-8859-8</td>
+  <td headers="h102">ISO8859_8</td>
+  <td headers="h103">8859_8 ISO_8859-8 ISO_8859-8:1988 cp916 iso-ir-138 ISO8859-8
+  hebrew iso8859_8 ibm-916 csISOLatinHebrew 916 ibm916</td>
+  <td headers="h104">Latin/Hebrew Alphabet</td>
+ </tr>
+ <tr>
+  <td headers="h101">JIS_X0201</td>
+  <td headers="h102">JIS_X0201</td>
+  <td headers="h103">JIS0201 csHalfWidthKatakana X0201 JIS_X0201</td>
+  <td headers="h104">JIS X 0201</td>
+ </tr>
+ <tr>
+  <td headers="h101">JIS_X0212-1990</td>
+  <td headers="h102">JIS_X0212-1990</td>
+  <td headers="h103">JIS0212 iso-ir-159 x0212 jis_x0212-1990
+  csISO159JISX02121990</td>
+  <td headers="h104">JIS X 0212</td>
+ </tr>
+ <tr>
+  <td headers="h101">Shift_JIS</td>
+  <td headers="h102">SJIS</td>
+  <td headers="h103">shift_jis x-sjis sjis shift-jis ms_kanji csShiftJIS</td>
+  <td headers="h104">Shift-JIS, Japanese</td>
+ </tr>
+ <tr>
+  <td headers="h101">TIS-620</td>
+  <td headers="h102">TIS620</td>
+  <td headers="h103">tis620 tis620.2533</td>
+  <td headers="h104">TIS620, Thai</td>
+ </tr>
+ <tr>
+  <td headers="h101">windows-1255</td>
+  <td headers="h102">Cp1255</td>
+  <td headers="h103">cp1255</td>
+  <td headers="h104">Windows Hebrew</td>
+ </tr>
+ <tr>
+  <td headers="h101">windows-1256</td>
+  <td headers="h102">Cp1256</td>
+  <td headers="h103">cp1256</td>
+  <td headers="h104">Windows Arabic</td>
+ </tr>
+ <tr>
+  <td headers="h101">windows-1258</td>
+  <td headers="h102">Cp1258</td>
+  <td headers="h103">cp1258</td>
+  <td headers="h104">Windows Vietnamese</td>
+ </tr>
+ <tr>
+  <td headers="h101">windows-31j</td>
+  <td headers="h102">MS932</td>
+  <td headers="h103">MS932 windows-932 csWindows31J</td>
+  <td headers="h104">Windows Japanese</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-Big5-Solaris</td>
+  <td headers="h102">Big5_Solaris</td>
+  <td headers="h103">Big5_Solaris</td>
+  <td headers="h104">Big5 with seven additional Hanzi ideograph character mappings
+  for the Solaris zh_TW.BIG5 locale</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-euc-jp-linux</td>
+  <td headers="h102">EUC_JP_LINUX</td>
+  <td headers="h103">euc_jp_linux euc-jp-linux</td>
+  <td headers="h104">JISX 0201, 0208, EUC encoding Japanese</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-EUC-TW</td>
+  <td headers="h102">EUC_TW</td>
+  <td headers="h103">euctw cns11643 EUC-TW euc_tw</td>
+  <td headers="h104">CNS11643 (Plane 1-7,15), EUC encoding, Traditional Chinese</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-eucJP-Open</td>
+  <td headers="h102">EUC_JP_Solaris</td>
+  <td headers="h103">eucJP-open EUC_JP_Solaris</td>
+  <td headers="h104">JISX 0201, 0208, 0212, EUC encoding Japanese</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM1006</td>
+  <td headers="h102">Cp1006</td>
+  <td headers="h103">ibm1006 ibm-1006 1006 cp1006</td>
+  <td headers="h104">IBM AIX Pakistan (Urdu)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM1025</td>
+  <td headers="h102">Cp1025</td>
+  <td headers="h103">ibm-1025 1025 cp1025 ibm1025</td>
+  <td headers="h104">IBM Multilingual Cyrillic: Bulgaria, Bosnia, Herzegovinia,
+  Macedonia (FYR)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM1046</td>
+  <td headers="h102">Cp1046</td>
+  <td headers="h103">ibm1046 ibm-1046 1046 cp1046</td>
+  <td headers="h104">IBM Arabic - Windows</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM1097</td>
+  <td headers="h102">Cp1097</td>
+  <td headers="h103">ibm1097 ibm-1097 1097 cp1097</td>
+  <td headers="h104">IBM Iran (Farsi)/Persian</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM1098</td>
+  <td headers="h102">Cp1098</td>
+  <td headers="h103">ibm-1098 1098 cp1098 ibm1098</td>
+  <td headers="h104">IBM Iran (Farsi)/Persian (PC)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM1112</td>
+  <td headers="h102">Cp1112</td>
+  <td headers="h103">ibm1112 ibm-1112 1112 cp1112</td>
+  <td headers="h104">IBM Latvia, Lithuania</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM1122</td>
+  <td headers="h102">Cp1122</td>
+  <td headers="h103">cp1122 ibm1122 ibm-1122 1122</td>
+  <td headers="h104">IBM Estonia</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM1123</td>
+  <td headers="h102">Cp1123</td>
+  <td headers="h103">ibm1123 ibm-1123 1123 cp1123</td>
+  <td headers="h104">IBM Ukraine</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM1124</td>
+  <td headers="h102">Cp1124</td>
+  <td headers="h103">ibm-1124 1124 cp1124 ibm1124</td>
+  <td headers="h104">IBM AIX Ukraine</td>
+ </tr>
+ <tr class="jdk8_encoding">
+  <td headers="h101">x-IBM1166</td>
+  <td headers="h102">Cp1166</td>
+  <td headers="h103">cp1166 ibm1166 ibm-1166 1166</td>
+  <td headers="h104">IBM Cyrillic Multilingual with euro for Kazakhstan</td>
+ </tr>
+ <tr class="jdk8_encoding">
+  <td headers="h101">x-IBM1364</td>
+  <td headers="h102">Cp1364</td>
+  <td headers="h103">cp1364 ibm1364 ibm-1364 1364</td>
+  <td headers="h104">IBM EBCDIC KS X 1005-1</td>
+ </tr> 
+ <tr>
+  <td headers="h101">x-IBM1381</td>
+  <td headers="h102">Cp1381</td>
+  <td headers="h103">cp1381 ibm-1381 1381 ibm1381</td>
+  <td headers="h104">IBM OS/2, DOS People's Republic of China (PRC)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM1383</td>
+  <td headers="h102">Cp1383</td>
+  <td headers="h103">ibm1383 ibm-1383 1383 cp1383</td>
+  <td headers="h104">IBM AIX People's Republic of China (PRC)</td>
+ </tr>
+ <tr class="jdk8_encoding">
+  <td headers="h101">x-IBM300</td>
+  <td headers="h102">Cp300</td>
+  <td headers="h103">cp300 ibm300 300 ibm-300</td>
+  <td headers="h104">IBM Japanese Latin Host Double-Byte</td>
+ </tr> 
+ <tr>
+  <td headers="h101">x-IBM33722</td>
+  <td headers="h102">Cp33722</td>
+  <td headers="h103">33722 ibm-33722 cp33722 ibm33722 ibm-5050
+  ibm-33722_vascii_vpua</td>
+  <td headers="h104">IBM-eucJP - Japanese (superset of 5050)</td>
+ </tr>
+ <tr class="jdk8_encoding">
+  <td headers="h101">x-IBM833</td>
+  <td headers="h102">Cp833</td>
+  <td headers="h103">ibm833 cp833 ibm-833</td>
+  <td headers="h104"> IBM Korean Host Extended SBCS</td>
+ </tr> 
+ <tr>
+  <td headers="h101">x-IBM834</td>
+  <td headers="h102">Cp834</td>
+  <td headers="h103">ibm834 834 cp834 ibm-834</td>
+  <td headers="h104">IBM EBCDIC DBCS-only Korean</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM856</td>
+  <td headers="h102">Cp856</td>
+  <td headers="h103">ibm856 856 cp856 ibm-856</td>
+  <td headers="h104">IBM Hebrew</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM875</td>
+  <td headers="h102">Cp875</td>
+  <td headers="h103">ibm-875 ibm875 875 cp875</td>
+  <td headers="h104">IBM Greek</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM921</td>
+  <td headers="h102">Cp921</td>
+  <td headers="h103">ibm921 921 ibm-921 cp921</td>
+  <td headers="h104">IBM Latvia, Lithuania (AIX, DOS)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM922</td>
+  <td headers="h102">Cp922</td>
+  <td headers="h103">ibm922 922 cp922 ibm-922</td>
+  <td headers="h104">IBM Estonia (AIX, DOS)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM930</td>
+  <td headers="h102">Cp930</td>
+  <td headers="h103">ibm-930 ibm930 930 cp930</td>
+  <td headers="h104">Japanese Katakana-Kanji mixed with 4370 UDC, superset of 5026</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM933</td>
+  <td headers="h102">Cp933</td>
+  <td headers="h103">ibm933 933 cp933 ibm-933</td>
+  <td headers="h104">Korean Mixed with 1880 UDC, superset of 5029</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM935</td>
+  <td headers="h102">Cp935</td>
+  <td headers="h103">cp935 ibm935 935 ibm-935</td>
+  <td headers="h104">Simplified Chinese Host mixed with 1880 UDC, superset of 5031</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM937</td>
+  <td headers="h102">Cp937</td>
+  <td headers="h103">ibm-937 ibm937 937 cp937</td>
+  <td headers="h104">Traditional Chinese Host miexed with 6204 UDC, superset of 5033</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM939</td>
+  <td headers="h102">Cp939</td>
+  <td headers="h103">ibm-939 cp939 ibm939 939</td>
+  <td headers="h104">Japanese Latin Kanji mixed with 4370 UDC, superset of 5035</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM942</td>
+  <td headers="h102">Cp942</td>
+  <td headers="h103">ibm-942 cp942 ibm942 942</td>
+  <td headers="h104">IBM OS/2 Japanese, superset of Cp932</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM942C</td>
+  <td headers="h102">Cp942C</td>
+  <td headers="h103">ibm942C cp942C ibm-942C 942C</td>
+  <td headers="h104">Variant of Cp942</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM943</td>
+  <td headers="h102">Cp943</td>
+  <td headers="h103">ibm943 943 ibm-943 cp943</td>
+  <td headers="h104">IBM OS/2 Japanese, superset of Cp932 and Shift-JIS</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM943C</td>
+  <td headers="h102">Cp943C</td>
+  <td headers="h103">943C cp943C ibm943C ibm-943C</td>
+  <td headers="h104">Variant of Cp943</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM948</td>
+  <td headers="h102">Cp948</td>
+  <td headers="h103">ibm-948 ibm948 948 cp948</td>
+  <td headers="h104">OS/2 Chinese (Taiwan) superset of 938</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM949</td>
+  <td headers="h102">Cp949</td>
+  <td headers="h103">ibm-949 ibm949 949 cp949</td>
+  <td headers="h104">PC Korean</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM949C</td>
+  <td headers="h102">Cp949C</td>
+  <td headers="h103">ibm949C ibm-949C cp949C 949C</td>
+  <td headers="h104">Variant of Cp949</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM950</td>
+  <td headers="h102">Cp950</td>
+  <td headers="h103">cp950 ibm950 950 ibm-950</td>
+  <td headers="h104">PC Chinese (Hong Kong, Taiwan)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM964</td>
+  <td headers="h102">Cp964</td>
+  <td headers="h103">ibm-964 cp964 ibm964 964</td>
+  <td headers="h104">AIX Chinese (Taiwan)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-IBM970</td>
+  <td headers="h102">Cp970</td>
+  <td headers="h103">ibm970 ibm-eucKR 970 cp970 ibm-970</td>
+  <td headers="h104">AIX Korean</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-ISCII91</td>
+  <td headers="h102">ISCII91</td>
+  <td headers="h103">ISCII91 iso-ir-153 iscii ST_SEV_358-88 csISO153GOST1976874</td>
+  <td headers="h104">ISCII91 encoding of Indic scripts</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-ISO2022-CN-CNS</td>
+  <td headers="h102">ISO2022_CN_CNS</td>
+  <td headers="h103"><em>Not available</em></td>
+  <td headers="h104">CNS11643 in ISO 2022 CN form, Traditional Chinese (conversion
+  from Unicode only)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-ISO2022-CN-GB</td>
+  <td headers="h102">ISO2022_CN_GB</td>
+  <td headers="h103"><em>Not available</em></td>
+  <td headers="h104">GB2312 in ISO 2022 CN form, Simplified Chinese (conversion from
+  Unicode only)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-iso-8859-11</td>
+  <td headers="h102">x-iso-8859-11</td>
+  <td headers="h103">iso-8859-11 iso8859_11</td>
+  <td headers="h104">Latin/Thai Alphabet</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-JIS0208</td>
+  <td headers="h102">x-JIS0208</td>
+  <td headers="h103">JIS0208 JIS_C6226-1983 iso-ir-87 x0208 JIS_X0208-1983
+  csISO87JISX0208</td>
+  <td headers="h104">JIS X 0208</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-JISAutoDetect</td>
+  <td headers="h102">JISAutoDetect</td>
+  <td headers="h103">JISAutoDetect</td>
+  <td headers="h104">Detects and converts from Shift-JIS, EUC-JP, ISO 2022 JP
+  (conversion to Unicode only)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-Johab</td>
+  <td headers="h102">x-Johab</td>
+  <td headers="h103">ms1361 ksc5601_1992 johab ksc5601-1992</td>
+  <td headers="h104">Korean, Johab character set</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacArabic</td>
+  <td headers="h102">MacArabic</td>
+  <td headers="h103">MacArabic</td>
+  <td headers="h104">Macintosh Arabic</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacCentralEurope</td>
+  <td headers="h102">MacCentralEurope</td>
+  <td headers="h103">MacCentralEurope</td>
+  <td headers="h104">Macintosh Latin-2</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacCroatian</td>
+  <td headers="h102">MacCroatian</td>
+  <td headers="h103">MacCroatian</td>
+  <td headers="h104">Macintosh Croatian</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacCyrillic</td>
+  <td headers="h102">MacCyrillic</td>
+  <td headers="h103">MacCyrillic</td>
+  <td headers="h104">Macintosh Cyrillic</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacDingbat</td>
+  <td headers="h102">MacDingbat</td>
+  <td headers="h103">MacDingbat</td>
+  <td headers="h104">Macintosh Dingbat</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacGreek</td>
+  <td headers="h102">MacGreek</td>
+  <td headers="h103">MacGreek</td>
+  <td headers="h104">Macintosh Greek</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacHebrew</td>
+  <td headers="h102">MacHebrew</td>
+  <td headers="h103">MacHebrew</td>
+  <td headers="h104">Macintosh Hebrew</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacIceland</td>
+  <td headers="h102">MacIceland</td>
+  <td headers="h103">MacIceland</td>
+  <td headers="h104">Macintosh Iceland</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacRoman</td>
+  <td headers="h102">MacRoman</td>
+  <td headers="h103">MacRoman</td>
+  <td headers="h104">Macintosh Roman</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacRomania</td>
+  <td headers="h102">MacRomania</td>
+  <td headers="h103">MacRomania</td>
+  <td headers="h104">Macintosh Romania</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacSymbol</td>
+  <td headers="h102">MacSymbol</td>
+  <td headers="h103">MacSymbol</td>
+  <td headers="h104">Macintosh Symbol</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacThai</td>
+  <td headers="h102">MacThai</td>
+  <td headers="h103">MacThai</td>
+  <td headers="h104">Macintosh Thai</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacTurkish</td>
+  <td headers="h102">MacTurkish</td>
+  <td headers="h103">MacTurkish</td>
+  <td headers="h104">Macintosh Turkish</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-MacUkraine</td>
+  <td headers="h102">MacUkraine</td>
+  <td headers="h103">MacUkraine</td>
+  <td headers="h104">Macintosh Ukraine</td>
+ </tr>
+ <tr class="jdk8_encoding">
+  <td headers="h101">x-MS932_0213</td>
+  <td headers="h102">x-MS950-HKSCS MS950_HKSCS</td>
+  <td headers="h103"><em>Not available</em></td>
+  <td headers="h104">Shift_JISX0213 Windows MS932 Variant</td>
+ </tr> 
+ <tr>
+  <td headers="h101">x-MS950-HKSCS</td>
+  <td headers="h102">MS950_HKSCS</td>
+  <td headers="h103">MS950_HKSCS</td>
+  <td headers="h104">Windows Traditional Chinese with Hong Kong extensions</td>
+ </tr>
+ <tr class="jdk8_encoding">
+  <td headers="h101">x-MS950-HKSCS-XP</td>
+  <td headers="h102">x-mswin-936 MS936</td>
+  <td headers="h103">MS950_HKSCS_XP</td>
+  <td headers="h104">HKSCS Windows XP Variant</td>
+ </tr> 
+ <tr>
+  <td headers="h101">x-mswin-936</td>
+  <td headers="h102">MS936</td>
+  <td headers="h103">ms936 ms_936</td>
+  <td headers="h104">Windows Simplified Chinese</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-PCK</td>
+  <td headers="h102">PCK</td>
+  <td headers="h103">pck</td>
+  <td headers="h104">Solaris version of Shift_JIS</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-SJIS_0213</td>
+  <td headers="h102">x-SJIS_0213</td>
+  <td headers="h103"><em>Not available</em></td>
+  <td headers="h104">Shift_JISX0213</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-windows-50220</td>
+  <td headers="h102">Cp50220</td>
+  <td headers="h103">cp50220 ms50220</td>
+  <td headers="h104">Windows Codepage 50220 (7-bit implementation)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-windows-50221</td>
+  <td headers="h102">Cp50221</td>
+  <td headers="h103">cp50221 ms50221</td>
+  <td headers="h104">Windows Codepage 50221 (7-bit implementation)</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-windows-874</td>
+  <td headers="h102">MS874</td>
+  <td headers="h103">ms-874 ms874 windows-874</td>
+  <td headers="h104">Windows Thai</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-windows-949</td>
+  <td headers="h102">MS949</td>
+  <td headers="h103">windows949 ms949 windows-949 ms_949</td>
+  <td headers="h104">Windows Korean</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-windows-950</td>
+  <td headers="h102">MS950</td>
+  <td headers="h103">ms950 windows-950</td>
+  <td headers="h104">Windows Traditional Chinese</td>
+ </tr>
+ <tr>
+  <td headers="h101">x-windows-iso2022jp</td>
+  <td headers="h102">x-windows-iso2022jp</td>
+  <td headers="h103">windows-iso2022jp</td>
+  <td headers="h104">Variant ISO-2022-JP (MS932 based)</td>
+ </tr>
+</table>
+
+<!--  footer start -->
+<div id="javasefooter">
+<div class="hr">
+<hr /></div>
+<div id="javasecopyright">
+<img id="oraclelogofooter" src=
+"../../../images/oraclelogo.gif" alt="Oracle and/or its affiliates"
+border="0" width="100" height="29" name=
+"oraclelogofooter" />
+
+<a href="../../../legal/cpyr.html">Copyright
+&#169;</a> 1993, 2018, Oracle and/or its affiliates. All rights
+reserved.</div>
+<div id="javasecontactus">
+<a href=
+"http://docs.oracle.com/javase/feedback.html">Contact
+Us</a>
+</div>
+</div>
+<!-- footer end -->
+
+<!-- STATIC FOOTER -->
+
+</body>
+</html>

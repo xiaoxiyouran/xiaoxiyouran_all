@@ -1,0 +1,15 @@
+# [error] Could not find tools.jar
+出现的错误如下：
+```sh
+Could not find tools.jar. Please check that C:\Program Files\Java\Jre8" is a valid JDK install.
+```
+解决：
+···
+Go to the "Gradle Task" view
+Right Click on the task you want to execute
+Select Open Gradle Run Configuration
+In the tab "Java Home" select your local JDK repository then click OK
+···
+
+## 参考
+https://stackoverflow.com/questions/11345193/gradle-does-not-find-tools-jar
