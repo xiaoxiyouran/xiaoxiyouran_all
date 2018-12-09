@@ -97,12 +97,15 @@
 		<Unit filename="/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/main.cpp">
 			<Option target="leetcode_tmp"/>
 		</Unit>
+<<<<<<< HEAD
 		<Unit filename="/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/queue.cpp">
 			<Option target="leetcode_tmp"/>
 		</Unit>
 		<Unit filename="/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/queue.h">
 			<Option target="leetcode_tmp"/>
 		</Unit>
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
 		<Unit filename="/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

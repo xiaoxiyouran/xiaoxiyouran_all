@@ -177,6 +177,7 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/leetcode_tmp.dir/build.make CMakeFiles/leetcode_tmp.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+<<<<<<< HEAD
 queue.o: queue.cpp.o
 
 .PHONY : queue.o
@@ -204,6 +205,8 @@ queue.cpp.s:
 	$(MAKE) -f CMakeFiles/leetcode_tmp.dir/build.make CMakeFiles/leetcode_tmp.dir/queue.cpp.s
 .PHONY : queue.cpp.s
 
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -219,9 +222,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+<<<<<<< HEAD
 	@echo "... queue.o"
 	@echo "... queue.i"
 	@echo "... queue.s"
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
 .PHONY : help
 
 

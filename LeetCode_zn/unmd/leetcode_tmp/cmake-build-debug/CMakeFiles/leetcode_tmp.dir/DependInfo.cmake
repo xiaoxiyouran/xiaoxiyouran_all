@@ -6,7 +6,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/GeneralPrint.cpp" "/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/cmake-build-debug/CMakeFiles/leetcode_tmp.dir/GeneralPrint.cpp.o"
   "/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/main.cpp" "/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/cmake-build-debug/CMakeFiles/leetcode_tmp.dir/main.cpp.o"
+<<<<<<< HEAD
   "/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/queue.cpp" "/Users/cookie/Desktop/xiaoxiyouran/src/LeetCode_zn/unmd/leetcode_tmp/cmake-build-debug/CMakeFiles/leetcode_tmp.dir/queue.cpp.o"
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

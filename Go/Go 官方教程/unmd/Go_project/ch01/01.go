@@ -1,6 +1,7 @@
 package main
 
 import (
+<<<<<<< HEAD
 	"golang.org/x/tour/tree"
 	"fmt"
 )
@@ -44,4 +45,21 @@ func main() {
 	//  比较两个tree的value值是否相等
 	fmt.Println(Same(tree.New(1), tree.New(1)))
 	fmt.Println(Same(tree.New(1), tree.New(2)))
+=======
+	"fmt"
+	"strings"
+)
+
+
+func WordCount(s string) map[string]int {
+	m := make(map[string]int)// map对象
+	c := strings.Fields(s)// []string
+	for _, v := range c {
+		m[v] += 1 // 如果v没有在map中，m[v]的值为初始值 0
+	}
+	return m
+}
+func main() {
+	wc.Test(WordCount)
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
 }

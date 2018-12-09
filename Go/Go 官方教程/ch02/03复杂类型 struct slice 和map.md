@@ -624,6 +624,7 @@ func main() {
 
 你会发现 [strings.Fields](http://golang.org/pkg/strings/#Fields) 很有帮助。
 
+<<<<<<< HEAD
 ### 方法一
 
 1- `strings.Fields(s)` 将 字符串s 进行分词， 然后将频率计数即可；
@@ -790,6 +791,8 @@ func main() {
 
 
 
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
 
 
 

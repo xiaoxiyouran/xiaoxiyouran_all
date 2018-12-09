@@ -5,8 +5,11 @@ CMakeFiles/leetcode_tmp.dir/GeneralPrint.cpp.o: ../GeneralPrint.cpp
 CMakeFiles/leetcode_tmp.dir/GeneralPrint.cpp.o: ../GeneralPrint.h
 
 CMakeFiles/leetcode_tmp.dir/main.cpp.o: ../main.cpp
+<<<<<<< HEAD
 CMakeFiles/leetcode_tmp.dir/main.cpp.o: ../queue.h
 
 CMakeFiles/leetcode_tmp.dir/queue.cpp.o: ../queue.cpp
 CMakeFiles/leetcode_tmp.dir/queue.cpp.o: ../queue.h
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
 

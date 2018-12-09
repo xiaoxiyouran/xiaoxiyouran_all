@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bc3658d-e621-406f-b363-d7c6adcd8fd9" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/go.imports.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/ch01/tour/pic.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../00 知乎如何学习Golang.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../00 知乎如何学习Golang.md" afterDir="false" />
@@ -26,6 +27,10 @@
       <change beforePath="$PROJECT_DIR$/../../../../LeetCode_zn/unmd/leetcode_tmp/cmake-build-debug/leetcode_tmp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../LeetCode_zn/unmd/leetcode_tmp/cmake-build-debug/leetcode_tmp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../LeetCode_zn/unmd/leetcode_tmp/cmake-build-debug/leetcode_tmp.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../LeetCode_zn/unmd/leetcode_tmp/cmake-build-debug/leetcode_tmp.cbp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../../LeetCode_zn/unmd/leetcode_tmp/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../LeetCode_zn/unmd/leetcode_tmp/main.cpp" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/../../ch02/03复杂类型 struct slice 和map.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../ch02/03复杂类型 struct slice 和map.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ch01/01.go" beforeDir="false" afterPath="$PROJECT_DIR$/ch01/01.go" afterDir="false" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +42,7 @@
     <session id="1769085406">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+<<<<<<< HEAD
           <entry key="project.closed" value="5" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.11" value="1" />
@@ -44,28 +50,49 @@
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="3" />
           <entry key="project.opened" value="7" />
+=======
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="2" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+<<<<<<< HEAD
           <entry key="go" value="14" />
+=======
+          <entry key="go" value="2" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
           <entry key="s" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+<<<<<<< HEAD
           <entry key="Go" value="14" />
+=======
+          <entry key="Go" value="2" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
           <entry key="x86 Plan9 Assembly" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+<<<<<<< HEAD
           <entry key="go" value="2459" />
+=======
+          <entry key="go" value="1245" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+<<<<<<< HEAD
           <entry key="Go" value="2459" />
+=======
+          <entry key="Go" value="1245" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -78,15 +105,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ch01/01.go">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="180">
               <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
               <folding>
                 <element signature="e#14#57#0" expanded="true" />
+=======
+            <state relative-caret-position="195">
+              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+              <folding>
+                <element signature="e#14#56#0" expanded="true" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file:///usr/local/Cellar/go/1.11.1/libexec/src/runtime/proc.go">
           <provider selected="true" editor-type-id="text-editor">
@@ -114,6 +149,8 @@
           </provider>
         </entry>
       </file>
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -130,9 +167,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/ch01/pic.go" />
         <option value="$PROJECT_DIR$/pic.go" />
         <option value="$PROJECT_DIR$/tour/pic.go" />
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
         <option value="$PROJECT_DIR$/ch01/01.go" />
       </list>
     </option>
@@ -144,10 +184,17 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
     <option name="x" value="1280" />
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="877" />
+=======
+    <option name="x" value="11" />
+    <option name="y" value="45" />
+    <option name="width" value="1219" />
+    <option name="height" value="737" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -155,7 +202,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scope" />
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -180,24 +230,44 @@
             <path>
               <item name="Go_project" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+<<<<<<< HEAD
               <item name="GOPATH &lt;Go_project&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+=======
+              <item name="Go SDK 1.11.1" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Go_project" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Go SDK 1.11.1" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="time" type="462c0819:PsiDirectoryNode" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
+<<<<<<< HEAD
     <property name="configurable.Global.GOPATH.is.expanded" value="true" />
     <property name="configurable.Module.GOPATH.is.expanded" value="true" />
     <property name="configurable.Project.GOPATH.is.expanded" value="true" />
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+<<<<<<< HEAD
     <property name="settings.editor.selected.configurable" value="go.autoimport" />
   </component>
   <component name="RecentsManager">
@@ -206,6 +276,8 @@
       <recent name="$PROJECT_DIR$/tour" />
       <recent name="$PROJECT_DIR$" />
     </key>
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -235,16 +307,28 @@
     </recent_temporary>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="1280" y="23" width="1440" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23104435" />
+=======
+    <frame x="11" y="45" width="1219" height="737" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25403568" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Run" order="2" weight="0.36305732" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3990461" />
+=======
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32868218" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -279,6 +363,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/ch01/tour/pic.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
@@ -332,10 +417,19 @@
           <caret line="16" column="22" lean-forward="true" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
           <folding>
             <element signature="e#14#57#0" expanded="true" />
+=======
+    <entry file="file://$PROJECT_DIR$/ch01/01.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#14#56#0" expanded="true" />
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file:///usr/local/Cellar/go/1.11.1/libexec/src/runtime/proc.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2955">
@@ -372,5 +466,7 @@
         </settings>
       </state>
     </states>
+=======
+>>>>>>> a748f1da0f67c75d934e106a64fd70bc756b70fd
   </component>
 </project>
